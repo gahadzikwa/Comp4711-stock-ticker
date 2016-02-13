@@ -11,6 +11,7 @@
 application/cache/*
 !application/cache/index.html
 !application/cache/.htaccess
+application/config/database.php
 
 */logs/log-*.php
 !*/logs/index.html
@@ -31,7 +32,7 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 
 ## Sublime Text cache files
 *.tmlanguage.cache
-*.tmPreferences.cache
+*.tmPreferences.cache5
 *.stTheme.cache
 *.sublime-workspace
 *.sublime-project
