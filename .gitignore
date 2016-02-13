@@ -11,6 +11,7 @@
 application/cache/*
 !application/cache/index.html
 !application/cache/.htaccess
+application/config/database.php
 
 */logs/log-*.php
 !*/logs/index.html
