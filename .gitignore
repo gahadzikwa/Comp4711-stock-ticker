@@ -32,7 +32,7 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 
 ## Sublime Text cache files
 *.tmlanguage.cache
-*.tmPreferences.cache5
+*.tmPreferences.cache
 *.stTheme.cache
 *.sublime-workspace
 *.sublime-project
