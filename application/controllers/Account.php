@@ -19,15 +19,13 @@ class Account extends Application {
             'password' => $this->input->post('password')
         );
 
-        // TODO: Create a function fo find a player using ussername + password in Player model
-        $players = $this->players->all();
-        foreach($players as $player)
+        $players = $this->players->login($data['username'], $data['password']);
+        $player = count($players) > 0 ? $players[0] : null;
+
+        if($player !== null)
         {
-            if($player['Player'] == $data['username'])
-            {
-                $this->session->set_userdata($data);
-                redirect('/Home', 'refresh');
-            }
+            $this->session->set_userdata($player);
+            redirect('/Home', 'refresh');
         }
 
         redirect('/Account', 'refresh');
@@ -35,9 +33,11 @@ class Account extends Application {
 
     public function logout()
     {
-        $this->session->unset_userdata('username');
-        $this->session->unset_userdata('password');
+        $this->session->unset_userdata('ID');
+        $this->session->unset_userdata('Player');
 
+        // TODO: Add password in later
+//        $this->session->unset_userdata('Password');
 
         redirect('/Home', 'refresh');
     }
