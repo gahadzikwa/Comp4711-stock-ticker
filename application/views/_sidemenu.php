@@ -9,16 +9,13 @@
             <a href="/home">Home</a>
         </li>
         <li>
-            <a href="/stockhistory">Stocks</a>
+            <a href="/stock">Stocks</a>
         </li>
         <li>
             <a href="/player">Player Profile</a>
         </li>
         <li>
-            <a href="/account">Log In</a>
-        </li>
-        <li>
-            <a href="/account/logout">Log Out</a>
+            <?php echo '<a href="'.$loghref.'">'.$loginout.'</a>' ?>
         </li>
     </ul>
 </div>
