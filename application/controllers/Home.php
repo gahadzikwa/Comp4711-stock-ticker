@@ -21,22 +21,39 @@ class Home extends Application {
 	public function index()
 	{        
             $this->load->model('homestock');             
-            $loader = $this->homestock->all_stocks();
+            $stockloader = $this->homestock->all_stocks();
                 $stocks = array();
-                $temp[] = array();
-                foreach($loader as $tempstock) {
-                    $temp = array(
-                        'id' => $tempstock['ID'], 
-                        'code' => $tempstock['Code'], 
-                        'name' => $tempstock['Name'], 
-                        'category' => $tempstock['Category'], 
-                        'value' => $tempstock['Value']
-                    ); 
-                    $stocks[$tempstock['ID']] = $temp;                 
-                }          
-                $this->data['stock'] = $stocks;
-		$this->data['pagebody'] = 'home';
-		$this->render();
+                $temp = array();
+                foreach($stockloader as $tempstock) {
+                $temp = array(
+                    'id' => $tempstock['ID'], 
+                    'code' => $tempstock['Code'], 
+                    'name' => $tempstock['Name'], 
+                    'category' => $tempstock['Category'], 
+                    'value' => $tempstock['Value']
+                ); 
+                $stocks[$tempstock['ID']] = $temp;                 
+            }          
+            $this->data['stocks'] = $stocks;
+            
+            
+            $playerloader = $this->homestock->all_players();
+                $players = array();
+                $temp2 = array();
+                foreach($playerloader as $tempplayer) {
+                $temp2 = array(
+                    'id' => $tempplayer['ID'], 
+                    'player' => $tempplayer['Player'], 
+                    'cash' => $tempplayer['Cash'], 
+                ); 
+                $players[$tempplayer['ID']] = $temp2;                 
+            }          
+            $this->data['players'] = $players;
+            
+            
+            
+            $this->data['pagebody'] = 'home';
+            $this->render();
 	}
         
         

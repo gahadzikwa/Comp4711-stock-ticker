@@ -6,8 +6,15 @@ class Homestock extends CI_Model {
     
     function all_stocks() {
         //$query = $this->db->query("<SQL STATEMENT HERE>");
-        $this->db->order_by("name");
+        $this->db->order_by("id");
         $query = $this->db->get('stocks');
+        //$query = $this->db->query("SELECT * from stocks");
+        return $query->result_array();
+    }
+    
+    function all_players() {
+        $this->db->order_by("id");
+        $query = $this->db->get('players');
         //$query = $this->db->query("SELECT * from stocks");
         return $query->result_array();
     }

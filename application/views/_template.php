@@ -18,11 +18,11 @@ if (!defined('APPPATH'))
         <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-        <link href="/application/assets/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
-        <link href="/application/assets/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen"/>
+        <link href="/assets/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+        <link href="/assets/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen"/>
 
-        <link rel="stylesheet" type="text/css" href="/application/assets/css/style.css"/>
-        <link rel="stylesheet" type="text/css" href="/application/assets/css/sidemenu.css"/>
+        <link rel="stylesheet" type="text/css" href="/assets/css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="/assets/css/sidemenu.css"/>
     </head>
     <body>
     <div id="wrapper">
@@ -45,8 +45,8 @@ if (!defined('APPPATH'))
     </div>
     </body>
 
-    <script src="/application/assets/script/jquery-1.12.0.min.js"></script>
-    <script src="/application/assets/script/bootstrap.min.js"></script>
+    <script src="/assets/script/jquery-1.12.0.min.js"></script>
+    <script src="/assets/script/bootstrap.min.js"></script>
     <script>
         $("#menu-toggle").click(function(e) {
             e.preventDefault();
