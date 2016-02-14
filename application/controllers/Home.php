@@ -23,7 +23,6 @@ class Home extends Application {
             $this->load->model('homestock');             
             $stockloader = $this->homestock->all_stocks();
                 $stocks = array();
-                $temp = array();
                 foreach($stockloader as $tempstock) {
                 $temp = array(
                     'id' => $tempstock['ID'], 
@@ -39,14 +38,13 @@ class Home extends Application {
             
             $playerloader = $this->homestock->all_players();
                 $players = array();
-                $temp2 = array();
                 foreach($playerloader as $tempplayer) {
-                $temp2 = array(
+                $temp = array(
                     'id' => $tempplayer['ID'], 
                     'player' => $tempplayer['Player'], 
                     'cash' => $tempplayer['Cash'], 
                 ); 
-                $players[$tempplayer['ID']] = $temp2;                 
+                $players[$tempplayer['ID']] = $temp;                 
             }          
             $this->data['players'] = $players;
             
