@@ -18,22 +18,39 @@ if (!defined('APPPATH'))
         <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-        <link href="/assets/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
-        <link rel="stylesheet" type="text/css" href="/assets/css/style.css"/>
+        <link href="/application/assets/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+        <link href="/application/assets/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen"/>
+
+        <link rel="stylesheet" type="text/css" href="/application/assets/css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="/application/assets/css/sidemenu.css"/>
     </head>
     <body>
-        <div class="container">
-            <div id="header">
-                {header}
-            </div>
-            <div id="content">
-                {content}
-            </div>
-            <div id="footer" class="span12">
-                Copyright &copy; 2015-2016,  <a href="mailto:someone@somewhere.com">Me</a>.
+    <div id="wrapper">
+        <!-- Sidebar -->
+        {sidemenu}
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        {content}
+                    </div>
+                </div>
             </div>
         </div>
-        <script src="/assets/js/jquery-1.12.0.min.js"></script>
-        <script src="/assets/js/bootstrap.min.js"></script>
+        <!-- /#page-content-wrapper -->
+
+    </div>
     </body>
+
+    <script src="/application/assets/script/jquery-1.12.0.min.js"></script>
+    <script src="/application/assets/script/bootstrap.min.js"></script>
+    <script>
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
 </html>
