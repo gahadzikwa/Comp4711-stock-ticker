@@ -28,19 +28,20 @@ class Account extends Application {
     public function submitLogin()
     {
         $this->load->model('players');
+        $this->load->helper('url');
+
         $data = array(
             'user_name' => $this->input->post('username'),
             'user_email_id' => $this->input->post('password')
         );
 
         $players = $this->players->all();
-//        var_dump($players);
+
         foreach($players as $player)
         {
-            if($player.Player == $data.user_name)
+            if($player['Player'] == $data['user_name'])
             {
-                $this->data['pagebody'] = 'home';
-                $this->render();
+                redirect('/Home', 'refresh');
             }
         }
 
