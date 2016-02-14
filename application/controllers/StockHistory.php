@@ -8,30 +8,53 @@ class StockHistory extends Application
     public function __construct()
     {
         parent::__construct();
-        $this->load->helper('form');
-        $this->load->helper('url');
-        $this->load->library('form_validation');
         $this->load->model('stocks');
     }
 
     public function index()
     {
+        $this->stockDropdownList();
+
         $this->data['pagebody'] = 'stockhistory';
-        //var_dump($this->stocks->get_stock_list());
-        $data['stock'] = $this->stocks->get_stock_list();
+
+       $this->render();
+    }
+
+    function stockDropdownList()
+    {
+        $stockloader = $this->stocks->getStockList();
+        $stocks = array();
+        foreach($stockloader as $tempstock) {
+            $temp = array(
+                'id' => $tempstock['ID'],
+                'code' => $tempstock['Code'],
+                'name' => $tempstock['Name'],
+                'category' => $tempstock['Category'],
+                'value' => $tempstock['Value']
+            );
+            $stocks[$tempstock['ID']] = $temp;
+        }
+        $this->data['stocks'] = $stocks;
+    }
 
 
-        // validate stock option
-        //$this->form_validation->set_rules('stock', 'Stock', 'callback_combo_check');
+    public function stock($id)
+    {
 
-//
-//        $this->load->model('stocks');
-//        $pix = $this->stocks->get_stock_list();
-//        var_dump($pix);
-////        $data['stock_list'] = $pix;
-////        $this->load->view('history', $data);
+        $this->load->model('stocks');
+
+        $this->stockDropdownList();
+
+        $stockMovements = $this->stocks->getStockMovements($id);
+        $this->data['stockmovements'] = $stockMovements;
+
+        $stockTransactions = $this->stocks->getStockTransactions($id);
+        $this->data['stocktransactions'] = $stockTransactions;
+
+        $this->data['pagebody'] = 'stockhistory';
 
         $this->render();
+
     }
 
 

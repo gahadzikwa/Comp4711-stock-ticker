@@ -1,19 +1,40 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock History</title>
-
-    <!--link the bootstrap css file-->
-    <link href="<?php echo base_url("assets/bootstrap/css/bootstrap.css"); ?>" rel="stylesheet" type="text/css" />
-    <!-- link jquery ui css-->
-    <link href="<?php echo base_url('assets/jquery-ui-1.11.2/jquery-ui.min.css'); ?>" rel="stylesheet" type="text/css" />
-    <script src="<?php echo base_url('assets/bootstrap.min.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/js/jquery-1.12.0.min.js'); ?>"></script>
-
-</head>
-</html>
-
 <h1>Stock History</h1>
 
+<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Stocks
+        <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+        {stocks}
+        <li><a href="/stockhistory/stock/{id}">{code}</a></li>
+        {/stocks}
+    </ul>
+</div>
+
+
+<h2>Stock Movements</h2>
+<div class="table">
+    <table class="table table-condensed" id="movements">
+        {stockmovements}
+        <tr>
+            <td>{Datetime}</td>
+            <td>{Action}</td>
+            <td>{Amount}</td>
+        </tr>
+        {/stockmovements}
+    </table>
+</div>
+
+
+<h2>Stock Transactions</h2>
+<div class="table">
+    <table class="table table-condensed" id="transactions">
+        {stocktransactions}
+        <tr>
+            <td>{DateTime}</td>
+            <td>{Player}</td>
+            <td>{Trans}</td>
+            <td>{Quantity}</td>
+        </tr>
+        {/stocktransactions}
+    </table>
+</div>
