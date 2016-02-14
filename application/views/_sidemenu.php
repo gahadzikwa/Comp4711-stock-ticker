@@ -12,7 +12,7 @@
             <a href="#">Stocks</a>
         </li>
         <li>
-            <a href="#">Player Profile</a>
+            <a href="/player">Player Profile</a>
         </li>
         <li>
             <a href="#">Sign In</a>
