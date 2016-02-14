@@ -25,8 +25,10 @@ class Application extends CI_Controller {
 		$this->data = array();
 		$this->errors = array();
 
-		$this->data['title'] = 'Stock Ticker';
-		$this->load->library('parser');
+        $this->load->library('parser');
+
+        $this->data['title'] = 'Stock Ticker';
+        $this->data['sidemenu'] = $this->parser->parse('_sidemenu', $this->data, true);
 	}
 
 	/**
@@ -34,7 +36,7 @@ class Application extends CI_Controller {
 	 */
 	function render()
 	{
-		$this->data['content'] = $this->parser->parse($this->data['pagebody'], $this->data, true);
+        $this->data['content'] = $this->parser->parse($this->data['pagebody'], $this->data, true);
 
 		// finally, build the browser page!
 		$this->data['data'] = &$this->data;
