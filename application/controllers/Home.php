@@ -19,8 +19,25 @@ class Home extends Application {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 	public function index()
-	{
+	{        
+            $this->load->model('homestock');             
+            $loader = $this->homestock->all_stocks();
+                $stocks = array();
+                $temp[] = array();
+                foreach($loader as $tempstock) {
+                    $temp = array(
+                        'id' => $tempstock['ID'], 
+                        'code' => $tempstock['Code'], 
+                        'name' => $tempstock['Name'], 
+                        'category' => $tempstock['Category'], 
+                        'value' => $tempstock['Value']
+                    ); 
+                    $stocks[$tempstock['ID']] = $temp;                 
+                }          
+                $this->data['stock'] = $stocks;
 		$this->data['pagebody'] = 'home';
 		$this->render();
 	}
+        
+        
 }
