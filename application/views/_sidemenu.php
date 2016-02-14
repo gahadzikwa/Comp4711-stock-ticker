@@ -17,5 +17,8 @@
         <li>
             <a href="/account">Log In</a>
         </li>
+        <li>
+            <a href="/account/logout">Log Out</a>
+        </li>
     </ul>
 </div>

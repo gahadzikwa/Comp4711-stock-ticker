@@ -20,32 +20,40 @@ class Account extends Application {
      */
     public function index()
     {
-        $this->load->model('players');
         $this->data['pagebody'] = 'login';
         $this->render();
     }
 
+    // TODO: This is just for testing purposes. Need to properly handle sessions with encryption, etc
     public function submitLogin()
     {
         $this->load->model('players');
-        $this->load->helper('url');
 
         $data = array(
-            'user_name' => $this->input->post('username'),
-            'user_email_id' => $this->input->post('password')
+            'username' => $this->input->post('username'),
+            'password' => $this->input->post('password')
         );
 
+        // TODO: Create a function fo find a player using ussername + password in Player model
         $players = $this->players->all();
-
         foreach($players as $player)
         {
-            if($player['Player'] == $data['user_name'])
+            if($player['Player'] == $data['username'])
             {
+                $this->session->set_userdata($data);
                 redirect('/Home', 'refresh');
             }
         }
 
-        $this->data['pagebody'] = 'login';
-        $this->render();
+        redirect('/Account', 'refresh');
+    }
+
+    public function logout()
+    {
+        $this->session->unset_userdata('username');
+        $this->session->unset_userdata('password');
+
+
+        redirect('/Home', 'refresh');
     }
 }
