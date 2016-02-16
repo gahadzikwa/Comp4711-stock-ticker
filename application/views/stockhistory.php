@@ -1,7 +1,7 @@
-<h1 style="display:inline"><?php echo $stock['Name']?></h1>
+<h1 style="display:inline">{stockname}</h1>
 <div class="dropdown pull-right" style="display:inline">
     <button class="btn btn-primary dropdown-toggle my-dropdown" type="button" data-toggle="dropdown">
-        <?php echo $stock['Code'] ?>
+        {stockcode}
         <span class="caret"></span></button>
     <ul class="dropdown-menu">
         {stocks}
@@ -9,7 +9,7 @@
         {/stocks}
     </ul>
 </div>
-<p><?php echo $stock['Code'].': $'.$stock['Value']?></p>
+<p>{stockcode}: {stockvalue}</p>
 <h2>Stock Movements</h2>
 <div class="table">
     <table class="table table-condensed" id="movements">

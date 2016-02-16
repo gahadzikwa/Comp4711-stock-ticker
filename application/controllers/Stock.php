@@ -21,11 +21,15 @@ class Stock extends Application
     {
         $this->session->set_userdata(array('stockindex' => $id));
 
-        $this->data['stocks'] = $this->stocks->all();
         $this->data['stock'] = $this->stocks->get($id)[0];
+        $this->data['stockname'] = $this->data['stock']['Name'];
+        $this->data['stockvalue'] =$this->data['stock']['Value'] ;
+        $this->data['stockcode'] = $this->data['stock']['Code'];
+
+        $this->data['stocks'] = $this->stocks->all();
         $this->data['stockmovements'] = $this->movements->getStockMovements($id);;
 
-        $tempTransactions = array();
+        $this->data['stocktransactions'] = array();
         foreach($this->transactions->getStockTransactions($id) as $trans)
         {
             $temp = array('DateTime' => $trans['DateTime'],
@@ -33,10 +37,8 @@ class Stock extends Application
                 'Quantity' => $trans['Quantity'],
                 'Trans' => $trans['Quantity'] >= 0 ? 'Buy' : 'Sell');
 
-            $tempTransactions[] = $temp;
+            $this->data['stocktransactions'][] = $temp;
         }
-
-        $this->data['stocktransactions'] = $tempTransactions;
 
         $this->data['pagebody'] = 'stockhistory';
         $this->render();
