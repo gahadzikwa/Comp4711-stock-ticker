@@ -1,7 +1,7 @@
-<h1 style="display:inline"><?php echo $player['Player'] ?></h1>
+<h1 style="display:inline">{player}</h1>
 <div class="dropdown pull-right my-dropdown" style="display:inline">
     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-        <?php echo $player['Player'] ?>
+        {player}
         <span class="caret"></span></button>
     <ul class="dropdown-menu">
         {players}
