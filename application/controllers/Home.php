@@ -37,6 +37,7 @@ class Home extends Application {
         foreach( $this->players->allPlayersIncludeEquity() as $player)
         {
             $temp = array(
+                'ID' => $player['ID'],
                 'Player' => $player['Player'],
                 'Cash' => $player['Cash'],
                 'Equity' => $player['Equity'] !== null ? $player['Equity'] : '0'
