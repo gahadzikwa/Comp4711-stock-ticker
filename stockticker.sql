@@ -20,6 +20,7 @@ SET time_zone = "+00:00";
 -- Drop Tables
 DROP TABLE IF EXISTS `transactions`;
 DROP TABLE IF EXISTS `movements`;
+DROP TABLE IF EXISTS `stockdistribution`;
 DROP TABLE IF EXISTS `players`;
 DROP TABLE IF EXISTS `stocks`;
 
@@ -78,6 +79,21 @@ INSERT INTO `stocks` (`Code`, `Name`, `Category`, `Value`) VALUES
 ('TECH', 'Tech', 'B', 37);
 
 -- --------------------------------------------------------
+
+--
+-- Table structure for table `stockdistribution`
+--
+
+CREATE TABLE IF NOT EXISTS `stockdistribution` (
+  `StockID` int NOT NULL,
+  `PlayerID` int NOT NULL,
+  `Quantity` int NOT NULL,
+  PRIMARY KEY (StockID, PlayerID),
+  FOREIGN KEY (PlayerID) REFERENCES players(ID),
+  FOREIGN KEY (StockID) REFERENCES stocks(ID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------------------------------------
 
 --
 -- Table structure for table `movements`
@@ -139,31 +155,38 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   `DateTime` varchar(19) DEFAULT NULL,
   `PlayerID` int NOT NULL,
   `StockID` int NOT NULL,
-  `Trans` varchar(4) DEFAULT NULL,
   `Quantity` int(4) DEFAULT NULL,
   PRIMARY KEY (ID),
   FOREIGN KEY (PlayerID) REFERENCES players(ID),
   FOREIGN KEY (StockID) REFERENCES stocks(ID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TRIGGER transactions_after_insert
+AFTER INSERT ON transactions
+FOR EACH ROW
+  INSERT INTO stockdistribution (StockID, PlayerID, Quantity)
+  VALUES(NEW.StockID, NEW.PlayerID, NEW.Quantity)
+  ON DUPLICATE KEY
+  UPDATE Quantity = Quantity + (NEW.Quantity);
+
 --
 -- Dumping data for table `transactions`
 --
 
-INSERT INTO `transactions` (`DateTime`, `PlayerID`, `StockID`, `Trans`, `Quantity`) VALUES
-('2016.02.01-09:01:00', 2, 1, 'buy', 100),
-('2016.02.01-09:01:05', 2, 6, 'sell', 1000),
-('2016.02.01-09:01:10', 4, 6, 'sell', 1000),
-('2016.02.01-09:01:15', 2, 4, 'sell', 1000),
-('2016.02.01-09:01:20', 3, 2, 'sell', 100),
-('2016.02.01-09:01:25', 3, 5, 'buy', 500),
-('2016.02.01-09:01:30', 4, 2, 'sell', 100),
-('2016.02.01-09:01:35', 4, 2, 'buy', 1000),
-('2016.02.01-09:01:40', 2, 6, 'buy', 100),
-('2016.02.01-09:01:45', 2, 5, 'sell', 100),
-('2016.02.01-09:01:50', 2, 6, 'sell', 100),
-('2016.02.01-09:01:55', 3, 5, 'buy', 100),
-('2016.02.01-09:01:60', 3, 4, 'buy', 100);
+INSERT INTO `transactions` (`DateTime`, `PlayerID`, `StockID`, `Quantity`) VALUES
+('2016.02.01-09:01:00', 2, 1, 100),
+('2016.02.01-09:01:05', 2, 6, 1000),
+('2016.02.01-09:01:10', 4, 6, 1000),
+('2016.02.01-09:01:15', 2, 4, 1000),
+('2016.02.01-09:01:20', 3, 2, 100),
+('2016.02.01-09:01:25', 3, 5, 500),
+('2016.02.01-09:01:30', 4, 2, 1000),
+('2016.02.01-09:01:35', 4, 2, -500),
+('2016.02.01-09:01:40', 2, 6, -100),
+('2016.02.01-09:01:45', 2, 5, 100),
+('2016.02.01-09:01:50', 2, 6, -100),
+('2016.02.01-09:01:55', 3, 5, -100),
+('2016.02.01-09:01:60', 3, 4, 100);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

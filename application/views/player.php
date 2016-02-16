@@ -1,34 +1,51 @@
-<h1>Player page</h1>
-
-<p>
-We are here because I'm testing the shit
-</p>
-
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose Different Player
-  <span class="caret"></span></button>
-  <ul class="dropdown-menu">
-    {dropdown}
-        <li><a id="{ID}" onclick="SelectPlayer({ID})" href="/player/{ID}">{Player}</a></li>
-    {/dropdown}
-  </ul>
+<h1 style="display:inline">{player}</h1>
+<div class="dropdown pull-right my-dropdown" style="display:inline">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+        {player}
+        <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+        {players}
+        <li><a id="{ID}" href="/player/player/{ID}">{Player}</a></li>
+        {/players}
+    </ul>
 </div>
-
+<p>
+    Player Profile Page
+</p>
+<h2>Current Holdings</h2>
 <div class="table">
-  <table class="table table-condensed" id="myTable">
-    {players}
+  <table class="table table-condensed">
+      <tr>
+          <th>Stock</th>
+          <th>Code</th>
+          <th>Quantity</th>
+      </tr>
+    {holdings}
     <tr>
-        <td>{ID}</td>
-        <td>{Player}</td>
-        <td>{Cash}</td>
+        <td>{Name}</td>
+        <td>{Code}</td>
+        <td>{Quantity}</td>
     </tr>
-    {/players}
+    {/holdings}
   </table>
 </div>
 
-<script>
-function SelectPlayer(id)
-{
-
-}
-</script>
+<h2>Trading Activity</h2>
+<div class="table">
+    <table class="table table-condensed">
+        <tr>
+            <th>Date/Time</th>
+            <th>Stock</th>
+            <th>Transaction</th>
+            <th>Quantity</th>
+        </tr>
+        {transactions}
+        <tr>
+            <td>{DateTime}</td>
+            <td>{Name}</td>
+            <td>{Trans}</td>
+            <td>{Quantity}</td>
+        </tr>
+        {/transactions}
+    </table>
+</div>

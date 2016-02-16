@@ -1,21 +1,21 @@
 <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
         <li class="sidebar-brand">
-            <a href="#">
+            <a href="/home">
                 STOCK TICKER
             </a>
         </li>
         <li>
-            <a href="#">Home</a>
+            <a href="/home">Home</a>
         </li>
         <li>
-            <a href="#">Stocks</a>
+            <a href="/stock">Stocks</a>
         </li>
         <li>
             <a href="/player">Player Profile</a>
         </li>
         <li>
-            <a href="#">Sign In</a>
+            <a href="{loghref}">{loginout}</a>
         </li>
     </ul>
 </div>

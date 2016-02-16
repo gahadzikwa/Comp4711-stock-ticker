@@ -20,38 +20,35 @@ class Home extends Application {
 	 */
 	public function index()
 	{        
-            $this->load->model('homestock');             
-            $stockloader = $this->homestock->all_stocks();
-                $stocks = array();
-                foreach($stockloader as $tempstock) {
-                $temp = array(
-                    'id' => $tempstock['ID'], 
-                    'code' => $tempstock['Code'], 
-                    'name' => $tempstock['Name'], 
-                    'category' => $tempstock['Category'], 
-                    'value' => $tempstock['Value']
-                ); 
-                $stocks[$tempstock['ID']] = $temp;                 
-            }          
-            $this->data['stocks'] = $stocks;
-            
-            
-            $playerloader = $this->homestock->all_players();
-                $players = array();
-                foreach($playerloader as $tempplayer) {
-                $temp = array(
-                    'id' => $tempplayer['ID'], 
-                    'player' => $tempplayer['Player'], 
-                    'cash' => $tempplayer['Cash'], 
-                ); 
-                $players[$tempplayer['ID']] = $temp;                 
-            }          
-            $this->data['players'] = $players;
-            
-            
-            
-            $this->data['pagebody'] = 'home';
-            $this->render();
+        $this->load->model('stocks');
+        $this->load->model('players');
+
+        if($this->session->userdata('Player') !== null)
+        {
+            $this->data['welcome'] = 'Welcome '.$this->session->userdata('Player');
+        }
+        else
+        {
+            $this->data['welcome'] = 'Welcome!  Please log in...';
+        }
+
+        $this->data['players'] = array();
+
+        foreach( $this->players->allPlayersIncludeEquity() as $player)
+        {
+            $temp = array(
+                'ID' => $player['ID'],
+                'Player' => $player['Player'],
+                'Cash' => $player['Cash'],
+                'Equity' => $player['Equity'] !== null ? $player['Equity'] : '0'
+            );
+
+            $this->data['players'][] = $temp;
+        }
+
+        $this->data['stocks'] = $this->stocks->all();
+        $this->data['pagebody'] = 'home';
+        $this->render();
 	}
         
         

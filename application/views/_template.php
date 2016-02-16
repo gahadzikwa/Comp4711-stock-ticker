@@ -26,11 +26,7 @@ if (!defined('APPPATH'))
     </head>
     <body>
     <div id="wrapper">
-        <!-- Sidebar -->
         {sidemenu}
-        <!-- /#sidebar-wrapper -->
-
-        <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -40,11 +36,8 @@ if (!defined('APPPATH'))
                 </div>
             </div>
         </div>
-        <!-- /#page-content-wrapper -->
-
     </div>
     </body>
-
     <script src="/assets/script/jquery-1.12.0.min.js"></script>
     <script src="/assets/script/bootstrap.min.js"></script>
     <script>
