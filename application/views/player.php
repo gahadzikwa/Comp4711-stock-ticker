@@ -17,12 +17,14 @@
   <table class="table table-condensed">
       <tr>
           <th>Stock</th>
+          <th>Code</th>
           <th>Quantity</th>
       </tr>
     {holdings}
     <tr>
-        <td>{ID}</td>
-        <td>{Player}</td>
+        <td>{Name}</td>
+        <td>{Code}</td>
+        <td>{Quantity}</td>
     </tr>
     {/holdings}
   </table>

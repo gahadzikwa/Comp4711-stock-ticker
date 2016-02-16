@@ -23,24 +23,6 @@ class Home extends Application {
         $this->load->model('stocks');
         $this->load->model('players');
 
-        foreach($this->stocks->headers() as $header)
-        {
-            if($header !== 'ID')
-            {
-                $temp = array('column' => $header);
-                $this->data['stocksheaders'][$header] = $temp;
-            }
-        }
-
-        foreach($this->players->headers() as $header)
-        {
-            if($header !== 'ID')
-            {
-                $temp = array('column' => $header);
-                $this->data['playersheaders'][$header] = $temp;
-            }
-        }
-
         if($this->session->userdata('Player') !== null)
         {
             $this->data['welcome'] = 'Welcome '.$this->session->userdata('Player');
@@ -50,7 +32,19 @@ class Home extends Application {
             $this->data['welcome'] = 'Welcome!  Please log in...';
         }
 
-        $this->data['players'] = $this->players->all();
+        $this->data['players'] = array();
+
+        foreach( $this->players->allPlayersIncludeEquity() as $player)
+        {
+            $temp = array(
+                'Player' => $player['Player'],
+                'Cash' => $player['Cash'],
+                'Equity' => $player['Equity'] !== null ? $player['Equity'] : '0'
+            );
+
+            $this->data['players'][] = $temp;
+        }
+
         $this->data['stocks'] = $this->stocks->all();
         $this->data['pagebody'] = 'home';
         $this->render();

@@ -24,4 +24,13 @@ class Stocks extends CI_Model {
         $this->db->where('ID=', $id);
         return $this->db->get('stocks')->result_array();
     }
+
+    function getPlayerStocks($playerId)
+    {
+        $this->db->select('*');
+        $this->db->from('stockdistribution');
+        $this->db->join('stocks', 'stockdistribution.StockID=stocks.ID');
+        $this->db->where('PlayerID=', $playerId);
+        return $this->db->get()->result_array();
+    }
 }
