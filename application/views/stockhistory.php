@@ -14,9 +14,9 @@
 <div class="table">
     <table class="table table-condensed" id="movements">
         <tr>
-            {movementsheaders}
-            <th>{name}</th>
-            {/movementsheaders}
+            <th>Date/Time</th>
+            <th>Action</th>
+            <th>Amount</th>
         </tr>
         {stockmovements}
         <tr>
@@ -33,9 +33,10 @@
 <div class="table">
     <table class="table table-condensed" id="transactions">
         <tr>
-            {transactionsheaders}
-            <th>{name}</th>
-            {/transactionsheaders}
+            <th>Date/Time</th>
+            <th>Player</th>
+            <th>Transaction</th>
+            <th>Quantity</th>
         </tr>
         {stocktransactions}
         <tr>

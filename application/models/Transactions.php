@@ -21,7 +21,7 @@ class Transactions extends CI_Model {
     {
         $this->db->select('*');
         $this->db->from('players');
-        $this->db->join('transactions', 'transactions.id = players.id');
+        $this->db->join('transactions', 'transactions.PlayerID = players.id');
         $this->db->where('StockID = ', $stockId);
         $this->db->order_by('Datetime');
         $query = $this->db->get();
@@ -31,8 +31,8 @@ class Transactions extends CI_Model {
     function getPlayerTransactions($playerId)
     {
         $this->db->select('*');
-        $this->db->from('stocks');
-        $this->db->join('transactions', 'transactions.id = stocks.id');
+        $this->db->from('transactions');
+        $this->db->join('stocks', 'transactions.StockID = stocks.id');
         $this->db->where('PlayerID=', $playerId);
         return $this->db->get()->result_array();
     }

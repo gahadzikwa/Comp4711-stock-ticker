@@ -23,10 +23,20 @@ class Player extends Application
 
         $this->data['player'] = $this->players->get($id)[0];
 
-//        $this->data['holdings'] = ;
+        $this->data['holdings'] = $this->stocks->getPlayerStocks($id);
 
-        $this->data['transactions'] = $this->transactions->getPlayerTransactions($id);
+        $tempTransactions = array();
+        foreach($this->transactions->getPlayerTransactions($id) as $trans)
+        {
+            $temp = array('DateTime' => $trans['DateTime'],
+                          'Name' => $trans['Name'],
+                          'Quantity' => $trans['Quantity'],
+                          'Trans' => $trans['Quantity'] >= 0 ? 'Buy' : 'Sell');
 
+             $tempTransactions[] = $temp;
+        }
+
+        $this->data['transactions'] = $tempTransactions;
 
         $this->data['pagebody'] = 'player';
         
