@@ -24,25 +24,19 @@ class Stock extends Application
         $this->data['stocks'] = $this->stocks->all();
         $this->data['stock'] = $this->stocks->get($id)[0];
         $this->data['stockmovements'] = $this->movements->getStockMovements($id);;
-        $this->data['stocktransactions'] = $this->transactions->getStockTransactions($id);
 
-        foreach($this->movements->headers() as $header)
+        $tempTransactions = array();
+        foreach($this->transactions->getStockTransactions($id) as $trans)
         {
-            if($header !== 'ID' && $header !== 'StockID')
-            {
-                $temp = array('name' => $header);
-                $this->data['movementsheaders'][$header] = $temp;
-            }
+            $temp = array('DateTime' => $trans['DateTime'],
+                'Player' => $trans['Player'],
+                'Quantity' => $trans['Quantity'],
+                'Trans' => $trans['Quantity'] >= 0 ? 'Buy' : 'Sell');
+
+            $tempTransactions[] = $temp;
         }
 
-        foreach($this->transactions->headers() as $header)
-        {
-            if($header !== 'ID' && $header !== 'StockID')
-            {
-                $temp = array('name' => ($header !== 'PlayerID' ? $header : 'Player'));
-                $this->data['transactionsheaders'][$header] = $temp;
-            }
-        }
+        $this->data['stocktransactions'] = $tempTransactions;
 
         $this->data['pagebody'] = 'stockhistory';
         $this->render();

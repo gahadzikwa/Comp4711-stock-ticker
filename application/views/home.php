@@ -3,9 +3,10 @@
 <div class="table-responsive"> 
     <table class="table">
         <tr>
-            {stocksheaders}
-            <th>{column}</th>
-            {/stocksheaders}
+            <th>Code</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Value</th>
         </tr>
         {stocks}
         <tr> 
@@ -22,14 +23,15 @@
 <div class="table-responsive"> 
     <table class="table">
         <tr>
-            {playersheaders}
-            <th>{column}</th>
-            {/playersheaders}
+            <th>Player</th>
+            <th>Cash</th>
+            <th>Equity</th>
         </tr>
         {players}
         <tr> 
             <td><a href="/player/player/{ID}">{Player}</a> </td>
             <td><a href="/player/player/{ID}">{Cash}</a> </td>
+            <td><a href="/player/player/{ID}">{Equity}</a> </td>
         </tr>
         {/players}
     </table>
