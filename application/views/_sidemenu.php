@@ -15,7 +15,7 @@
             <a href="/player">Player Profile</a>
         </li>
         <li>
-            <?php echo '<a href="'.$loghref.'">'.$loginout.'</a>' ?>
+            <a href="{loghref}">{loginout}</a>
         </li>
     </ul>
 </div>

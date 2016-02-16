@@ -21,7 +21,7 @@ class Player extends Application
     {
         $this->data['players'] = $this->players->all();
 
-        $this->data['player'] = $this->players->get($id)[0];
+        $this->data['player'] = $this->players->get($id)[0]['Player'];
 
         $this->data['holdings'] = $this->stocks->getPlayerStocks($id);
 
