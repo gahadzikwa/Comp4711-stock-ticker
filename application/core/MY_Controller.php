@@ -22,14 +22,25 @@ class Application extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
+
 		$this->data = array();
 		$this->errors = array();
 
-        $this->load->library('parser');
-
         $this->data['title'] = 'Stock Ticker';
+
+        if($this->session->userdata('Player') !== null)
+        {
+            $this->data['loginout'] = 'Log Out';
+            $this->data['loghref'] = '/account/logout';
+        }
+        else
+        {
+            $this->data['loginout'] = 'Log In';
+            $this->data['loghref'] = '/account';
+        }
+
         $this->data['sidemenu'] = $this->parser->parse('_sidemenu', $this->data, true);
-	}
+    }
 
 	/**
 	 * Render this page

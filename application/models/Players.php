@@ -8,24 +8,30 @@ class Players extends CI_Model
         parent::__construct();
     }
 
-    public function get($which)
-    {
-
-    }
 
     public function all()
     {
-        $query = $this->db->get('players');
-
-        return $query->result_array();
+        return $this->db->get('players')->result_array();
     }
 
-    public function GetPlayer($id)
+    function headers()
     {
-        $sql = "SELECT * FROM players WHERE ID = ?";
-        
-        $query = $this->db->query($sql, array($id));
+        return $this->db->list_fields('players');
+    }
 
-        return $query->result_array();
+    public function get($id)
+    {
+        $this->db->select('*');
+        $this->db->where('ID=', $id);
+        return $this->db->get('players')->result_array();
+    }
+
+    public function login($username, $password)
+    {
+        $this->db->select('*');
+        $this->db->where('Player=', $username);
+        //TODO: Add password where clause later
+        
+        return $this->db->get('players')->result_array();
     }
 }
