@@ -13,6 +13,7 @@ class Stock extends Application
 
     public function index()
     {
+        // TODO: Replace magic 1 with a method to find the highest ID
         $index = $this->session->userdata('stockindex') > 0 ? $this->session->userdata('stockindex') : 1;
         $this->stock($index);
     }

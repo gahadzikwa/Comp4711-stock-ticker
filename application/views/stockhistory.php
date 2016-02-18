@@ -21,7 +21,8 @@
         {stockmovements}
         <tr>
             <td>{Datetime}</td>
-            <td>{Action}</td>
+            <!-- TODO Derrick: Replace with better images and proper size -->
+            <td><img src="/assets/images/{Action}.png" alt="Smiley face" height="42" width="42"></td>
             <td>{Amount}</td>
         </tr>
         {/stockmovements}
