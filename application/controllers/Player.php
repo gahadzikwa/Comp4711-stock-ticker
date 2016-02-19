@@ -13,6 +13,7 @@ class Player extends Application
 
     public function index()
     {
+        // TODO: Replace magic 1 with a method to find the highest ID
         $index = $this->session->userdata('ID') !== null ? $this->session->userdata('ID') : 1;
         $this->player($index);
     }
