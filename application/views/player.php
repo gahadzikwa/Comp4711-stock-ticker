@@ -26,84 +26,52 @@
 </div>
 <div class="dropdown pull-left my-dropdown" >
     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-        <span class="caret">
-        </span>
+    <span class="caret">
+    </span>
     </button>
     <ul class="dropdown-menu">
         {playerList}
         <li>
             <a id="{ID}" href="/player/player/{ID}">
-                {Player}
+            {Player}
             </a>
         </li>
         {/playerList}
     </ul>
 </div>
 <div class="col-md-12">
-    <h2>
-        Current Holdings
-    </h2>
+    <h2>Current Holdings</h2>
     <div class="table">
         <table class="table table-condensed">
             <tr>
-                <th>
-                    Stock
-                </th>
-                <th>
-                    Code
-                </th>
-                <th>
-                    Quantity
-                </th>
+                <th>Stock</th>
+                <th>Code</th>
+                <th>Quantity</th>
             </tr>
             {holdings}
             <tr>
-                <td>
-                    {Name}
-                </td>
-                <td>
-                    {Code}
-                </td>
-                <td>
-                    {Quantity}
-                </td>
+                <td>{Name}</td>
+                <td>{Code}</td>
+                <td>{Quantity}</td>
             </tr>
             {/holdings}
         </table>
     </div>
-    <h2>
-        Trading Activity
-    </h2>
+    <h2>Trading Activity</h2>
     <div class="table">
         <table class="table table-condensed">
             <tr>
-                <th>
-                    Date/Time
-                </th>
-                <th>
-                    Stock
-                </th>
-                <th>
-                    Transaction
-                </th>
-                <th>
-                    Quantity
-                </th>
+                <th>Date/Time</th>
+                <th>Stock</th>
+                <th>Transaction</th>
+                <th>Quantity</th>
             </tr>
             {transactions}
             <tr>
-                <td>
-                    {DateTime}
-                </td>
-                <td>
-                    {Name}
-                </td>
-                <td>
-                    {Trans}
-                </td>
-                <td>
-                    {Quantity}
-                </td>
+                <td>{DateTime}</td>
+                <td>{Name}</td>
+                <td>{Trans}</td>
+                <td>{Quantity}</td>
             </tr>
             {/transactions}
         </table>
