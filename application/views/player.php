@@ -1,92 +1,111 @@
-<div>
-    <h1 style="display:inline">
-        {player}
-    </h1>
-    <div class="dropdown pull-right my-dropdown" style="display:inline">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-            {player}
-            <span class="caret">
-            </span>
-        </button>
-        <ul class="dropdown-menu">
-            {players}
-            <li>
-                <a id="{ID}" href="/player/player/{ID}">
-                    {Player}
-                </a>
-            </li>
-            {/players}
-        </ul>
-    </div>
-    <p>
-        Player Profile Page
-    </p>
+<div class="list-group col-md-4">
+    <a href="#" class="list-group-item active">
+        <h4 class="list-group-item-heading">
+            Current Player
+        </h4>
+        <p class="list-group-item-text">
+            {playerName}
+        </p>
+    </a>
+    <a href="#" class="list-group-item">
+        <h4 class="list-group-item-heading">
+            Current Cash
+        </h4>
+        <p class="list-group-item-text">
+            {playerCash}
+        </p>
+    </a>
+    <a href="#" class="list-group-item">
+        <h4 class="list-group-item-heading">
+            Equity
+        </h4>
+        <p class="list-group-item-text">
+            {playerEquity}
+        </p>
+    </a>
 </div>
-<div class="table">
+<div class="dropdown pull-left my-dropdown" >
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+        <span class="caret">
+        </span>
+    </button>
+    <ul class="dropdown-menu">
+        {playerList}
+        <li>
+            <a id="{ID}" href="/player/player/{ID}">
+                {Player}
+            </a>
+        </li>
+        {/playerList}
+    </ul>
+</div>
+<div class="col-md-12">
     <h2>
         Current Holdings
     </h2>
-    <table class="table table-condensed">
-        <tr>
-            <th>
-                Stock
-            </th>
-            <th>
-                Code
-            </th>
-            <th>
-                Quantity
-            </th>
-        </tr>
-        {holdings}
-        <tr>
-            <td>
-                <a href='/stock/stock/{ID}'>{Name}</a>
-            </td>
-            <td>
-                <a href='/stock/stock/{ID}'>{Code}</a>
-            </td>
-            <td>
-                <a href='/stock/stock/{ID}'>{Quantity}</a>
-            </td>
-        </tr>
-        {/holdings}
-    </table>
-</div>
-<div class="table">
+    <div class="table">
+        <table class="table table-condensed">
+            <tr>
+                <th>
+                    Stock
+                </th>
+                <th>
+                    Code
+                </th>
+                <th>
+                    Quantity
+                </th>
+            </tr>
+            {holdings}
+            <tr>
+                <td>
+                    {Name}
+                </td>
+                <td>
+                    {Code}
+                </td>
+                <td>
+                    {Quantity}
+                </td>
+            </tr>
+            {/holdings}
+        </table>
+    </div>
     <h2>
         Trading Activity
     </h2>
-    <table class="table table-condensed">
-        <tr>
-            <th>
-                Date/Time
-            </th>
-            <th>
-                Stock
-            </th>
-            <th>
-                Transaction
-            </th>
-            <th>
-                Quantity
-            </th>
-        </tr>
-        {transactions}
-        <tr>
-            <td>
-                {DateTime}
-            </td>
-            <td>
-                {Name}
-            </td>
-            <td>
-                {Trans}
-            </td>
-            <td>
-                {Quantity}
-            </td>
-        </tr>
-        {/transactions}
-    </table>
+    <div class="table">
+        <table class="table table-condensed">
+            <tr>
+                <th>
+                    Date/Time
+                </th>
+                <th>
+                    Stock
+                </th>
+                <th>
+                    Transaction
+                </th>
+                <th>
+                    Quantity
+                </th>
+            </tr>
+            {transactions}
+            <tr>
+                <td>
+                    {DateTime}
+                </td>
+                <td>
+                    {Name}
+                </td>
+                <td>
+                    {Trans}
+                </td>
+                <td>
+                    {Quantity}
+                </td>
+            </tr>
+            {/transactions}
+        </table>
+    </div>
 </div>
