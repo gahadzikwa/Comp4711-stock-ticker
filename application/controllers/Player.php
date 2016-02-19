@@ -19,9 +19,13 @@ class Player extends Application
 
     public function player($id)
     {
-        $this->data['players'] = $this->players->all();
+        $this->data['playerList'] = $this->players->all();
 
-        $this->data['player'] = $this->players->get($id)[0]['Player'];
+        $this->data['playerName'] = $this->players->get($id)[0]["Player"];
+
+        $this->data['playerCash'] = number_format($this->players->get($id)[0]["Cash"]);
+
+        $this->data['playerEquity'] = number_format($this->players->get($id)[0]["Equity"]);
 
         $this->data['holdings'] = $this->stocks->getPlayerStocks($id);
 
