@@ -13,15 +13,18 @@ class Player extends Application
 
     public function index()
     {
+        // TODO: Replace magic 1 with a method to find the highest ID
         $index = $this->session->userdata('ID') !== null ? $this->session->userdata('ID') : 1;
         $this->player($index);
     }
 
     public function player($id)
     {
-        $this->data['players'] = $this->players->all();
+        $this->data['playerList'] = $this->players->all();
 
-        $this->data['player'] = $this->players->get($id)[0]['Player'];
+        $this->data['currentPlayer'] = $this->players->get($id);
+
+        $this->data['playerEquity'] = number_format($this->players->getPlayerEquity($id)[0]["Equity"]);
 
         $this->data['holdings'] = $this->stocks->getPlayerStocks($id);
 
