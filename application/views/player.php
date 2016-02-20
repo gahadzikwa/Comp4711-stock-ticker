@@ -28,6 +28,7 @@
 </div>
 <div class="dropdown pull-left my-dropdown" >
     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+        {currentPlayer}{Player}{/currentPlayer}
     <span class="caret">
     </span>
     </button>
@@ -41,6 +42,7 @@
         {/playerList}
     </ul>
 </div>
+
 <div class="col-md-12">
     <h2>Current Holdings</h2>
     <div class="table">
