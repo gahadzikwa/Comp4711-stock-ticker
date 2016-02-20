@@ -34,6 +34,7 @@ class Transactions extends CI_Model {
         $this->db->from('transactions');
         $this->db->join('stocks', 'transactions.StockID = stocks.id');
         $this->db->where('PlayerID=', $playerId);
+        $this->db->order_by("DateTime", "desc");
         return $this->db->get()->result_array();
     }
 }
