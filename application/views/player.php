@@ -1,10 +1,11 @@
 <div class="list-group col-md-4">
     <a href="#" class="list-group-item active">
+        {currentPlayer}
         <h4 class="list-group-item-heading">
             Current Player
         </h4>
         <p class="list-group-item-text">
-            {playerName}
+            {Player}
         </p>
     </a>
     <a href="#" class="list-group-item">
@@ -12,15 +13,16 @@
             Current Cash
         </h4>
         <p class="list-group-item-text">
-            {playerCash}
+            {Cash} peanut
         </p>
     </a>
+    {/currentPlayer}
     <a href="#" class="list-group-item">
         <h4 class="list-group-item-heading">
             Equity
         </h4>
         <p class="list-group-item-text">
-            {playerEquity}
+            {playerEquity} peanut
         </p>
     </a>
 </div>
@@ -64,7 +66,7 @@
                 <th>Date/Time</th>
                 <th>Stock</th>
                 <th>Transaction</th>
-                <th>Quantity</th>
+                <th>Quantity (Peanut)</th>
             </tr>
             {transactions}
             <tr>

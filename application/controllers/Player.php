@@ -22,11 +22,9 @@ class Player extends Application
     {
         $this->data['playerList'] = $this->players->all();
 
-        $this->data['playerName'] = $this->players->get($id)[0]["Player"];
+        $this->data['currentPlayer'] = $this->players->get($id);
 
-        $this->data['playerCash'] = number_format($this->players->get($id)[0]["Cash"]);
-
-        $this->data['playerEquity'] = number_format($this->players->get($id)[0]["Equity"]);
+        $this->data['playerEquity'] = number_format($this->players->getPlayerEquity($id)[0]["Equity"]);
 
         $this->data['holdings'] = $this->stocks->getPlayerStocks($id);
 
