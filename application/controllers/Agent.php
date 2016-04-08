@@ -1,0 +1,68 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: brandon
+ * Date: 08/04/16
+ * Time: 1:10 PM
+ */
+class Agent extends Application
+{
+    function __contruct() {
+        parent::__construct();
+    }
+
+    public function game_status() {
+        // 1. initialize
+        $curly = curl_init();
+
+        // 2. set the options, including the url
+        curl_setopt($curly, CURLOPT_URL, BSX_URL);
+        curl_setopt($curly, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curly, CURLOPT_HEADER, 0);
+
+        // 3. execute and fetch the resulting HTML output
+        $response = curl_exec($curly);
+
+        // 4. free up the curl handle
+        curl_close($curly);
+
+        $xml_resp = new SimpleXMLElement($response);
+
+        foreach($xml_resp->entry as $oEntry){
+            echo $oEntry . '\n';
+        }
+
+        // Check response status
+        var_dump($xml_resp);
+    }
+
+    public function buy($stock_code, $qty, $player_name) {
+
+        // Validate data
+        // Check if stock_code exists
+        // Check if qty is valid
+        // Check if $player_name exists
+
+        // POST buy request
+
+        // Check response status
+        // If response good store data into stockdistribution table
+        // else return an error
+
+        /*
+            <?xml version="1.0"?>
+            <certificate>
+                <token>9ff24</token>
+                <stock>BOND</stock>
+                <agent>g01</agent>
+                <player>poop_face</player>
+                <amount>5</amount>
+                <datetime>2016-04-08T16:57:01-04:00</datetime>
+            </certificate>
+         */
+    }
+
+    public function sell() {
+
+    }
+}
