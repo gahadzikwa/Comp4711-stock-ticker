@@ -34,7 +34,6 @@ class Stocks extends CI_Model {
         return $result;
     }
 
-
     // returns an array of stocks
     function get($id)
     {
@@ -57,10 +56,10 @@ class Stocks extends CI_Model {
 
     function getPlayerStocks($playerId)
     {
-        $this->db->select('*');
-        $this->db->from('stockdistribution');
-        $this->db->join('stocks', 'stockdistribution.StockID=stocks.ID');
-        $this->db->where('PlayerID=', $playerId);
-        return $this->db->get()->result_array();
+//        $this->db->select('*');
+//        $this->db->from('stockdistribution');
+//        $this->db->join('stocks', 'stockdistribution.StockID=stocks.ID');
+//        $this->db->where('PlayerID=', $playerId);
+//        return $this->db->get()->result_array();
     }
 }

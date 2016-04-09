@@ -13,14 +13,14 @@ class Stock extends Application
 
     public function index()
     {
-        // TODO: Replace magic 1 with a method to find the highest ID
-        $index = $this->session->userdata('stockindex') > 0 ? $this->session->userdata('stockindex') : 1;
-        $this->stock($index);
+        $stocks = $this->stocks->all();
+
+        $this->stock($stocks[0]['code']);
     }
 
-    public function stock($id)
+    public function stock($stockcode)
     {
-        $this->session->set_userdata(array('stockindex' => $id));
+        $this->session->set_userdata(array('$stockcode' => $stockcode));
 
         // get stock information
         $this->data['stockname'] = "FIX ME PLS";
@@ -28,10 +28,10 @@ class Stock extends Application
         $this->data['stocks'] = $this->stocks->all();
 
         // get stock movements
-        $this->data['stockmovements'] = $this->movements->getStockMovements($id);
+        $this->data['stockmovements'] = $this->movements->getStockMovements($stockcode);
 
         // get stock transactions
-        $this->data['stocktransactions'] = $this->transactions->getStockTransactions($id);
+        $this->data['stocktransactions'] = $this->transactions->getStockTransactions($stockcode);
 
         // load stockhistory view
         $this->data['pagebody'] = 'stockhistory';

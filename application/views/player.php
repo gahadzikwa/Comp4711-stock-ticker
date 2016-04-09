@@ -1,42 +1,38 @@
 <div class="list-group col-md-4">
     <a href="#" class="list-group-item active">
-        {currentPlayer}
         <h4 class="list-group-item-heading">
-            Current Player
+            {current_player_username}
         </h4>
-        <p class="list-group-item-text">
-            {Player}
-        </p>
+
     </a>
     <a href="#" class="list-group-item">
         <h4 class="list-group-item-heading">
             Current Cash
         </h4>
         <p class="list-group-item-text">
-            {Cash} peanut
+            {current_player_cash} peanut
         </p>
     </a>
-    {/currentPlayer}
     <a href="#" class="list-group-item">
         <h4 class="list-group-item-heading">
             Equity
         </h4>
         <p class="list-group-item-text">
-            {playerEquity} peanut
+            {current_player_equity} peanut
         </p>
     </a>
 </div>
-<div class="dropdown pull-left my-dropdown" >
+<div class="dropdown pull-right my-dropdown" >
     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-        {currentPlayer}{Player}{/currentPlayer}
+        {current_player_username}
     <span class="caret">
     </span>
     </button>
     <ul class="dropdown-menu">
         {playerList}
         <li>
-            <a id="{ID}" href="/player/player/{ID}">
-            {Player}
+            <a id="{Username}" href="/player/player/{Username}">
+            {Username}
             </a>
         </li>
         {/playerList}
