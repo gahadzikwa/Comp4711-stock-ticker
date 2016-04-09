@@ -26,12 +26,22 @@ class Application extends CI_Controller {
 
         if($this->session->userdata('user') !== null)
         {
-			$this->data['menu_items'] = array(
-				array('name' => "Game", 'link' => '/game'),
-				array('name' => "Players", 'link' => '/player'),
-				array('name' => "Stocks", 'link' => '/stock'),
-				array('name' => "Sign Out", 'link' => '/account/logout')
-			);
+           if($this->session->userdata('user')->Role == ROLE_ADMIN) {
+               $this->data['menu_items'] = array(
+                   array('name' => "Management", 'link' => '/agent/management'),
+                   array('name' => "Settings", 'link' => '/settings'),
+                   array('name' => "Sign Out", 'link' => '/account/logout')
+               );
+           }
+           else {
+               $this->data['menu_items'] = array(
+                   array('name' => "Game", 'link' => '/game'),
+                   array('name' => "Players", 'link' => '/player'),
+                   array('name' => "Stocks", 'link' => '/stock'),
+                   array('name' => "Settings", 'link' => '/settings'),
+                   array('name' => "Sign Out", 'link' => '/account/logout')
+               );
+           }
         }
         else
         {

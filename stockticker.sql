@@ -43,7 +43,11 @@ CREATE TABLE IF NOT EXISTS `players` (
 --
 
 INSERT INTO `players` (`Username`, `Password`, `Role`, `Cash`) VALUES
-('Mickey', '$2y$10$uuYKSeNSudTSleojm38bseb/FL5c/GTIsRd4xo9eWX36OLrRdU./i', 'Admin', 1000);
+('mickey', '$2y$10$uuYKSeNSudTSleojm38bseb/FL5c/GTIsRd4xo9eWX36OLrRdU./i', 'Admin', 1000),
+('brandon', '$2y$10$uuYKSeNSudTSleojm38bseb/FL5c/GTIsRd4xo9eWX36OLrRdU./i', 'Player', 100000),
+('derrick', '$2y$10$uuYKSeNSudTSleojm38bseb/FL5c/GTIsRd4xo9eWX36OLrRdU./i', 'Player', 1000),
+('duy', '$2y$10$uuYKSeNSudTSleojm38bseb/FL5c/GTIsRd4xo9eWX36OLrRdU./i', 'Player', 1000),
+('clifton', '$2y$10$uuYKSeNSudTSleojm38bseb/FL5c/GTIsRd4xo9eWX36OLrRdU./i', 'Player', 1000);
 
 -- --------------------------------------------------------
 

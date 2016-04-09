@@ -19,7 +19,7 @@ class Account extends Application {
     // TODO: This is just for testing purposes. Need to properly handle sessions with encryption, etc
     public function submitLogin()
     {
-        $data = $this->input->post('username');
+        $data = strtolower($this->input->post('username'));
 
         if($data == null)
         {
@@ -57,7 +57,7 @@ class Account extends Application {
      */
     public function submitRegister() 
     {        
-        $data = $this->input->post('username');
+        $data = strtolower($this->input->post('username'));
 
         if($data == null)
         {

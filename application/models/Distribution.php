@@ -2,7 +2,6 @@
 
 class StockDistribution extends CI_Model
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -16,12 +15,5 @@ class StockDistribution extends CI_Model
     public function all()
     {
         return $this->db->get('stockdistribution')->result_array();
-    }
-
-    public function get($username)
-    {
-        $this->db->select('*');
-        $this->db->where('username=', $username);
-        return $this->db->get('players')->row();
     }
 }
