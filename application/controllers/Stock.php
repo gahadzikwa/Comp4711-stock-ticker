@@ -13,14 +13,15 @@ class Stock extends Application
 
     public function index()
     {
-        $stocks = $this->stocks->all();
-
-        $this->stock($stocks[0]['code']);
+        $this->stock();
     }
 
-    public function stock($stockcode)
+    public function stock($stockcode = null)
     {
-        $this->session->set_userdata(array('$stockcode' => $stockcode));
+        // get stock code for current page
+        $stockcode = $stockcode == null ? $this->data['stocks'][0]['code'] : $stockcode;
+
+        $this->data['stocks'] = $this->stocks->all();
 
         // get stock name
         $this->data['stockname'] = $this->stocks->getStockName($stockcode, "stockname");
@@ -33,6 +34,7 @@ class Stock extends Application
 
         // get value for stock list
         $this->data['stocks'] = $this->stocks->all();
+
 
         // get stock movements
         $this->data['stockmovements'] = $this->movements->getStockMovements($stockcode);

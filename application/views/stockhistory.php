@@ -10,7 +10,7 @@
     </ul>
 </div>
 <p>{stockcode}: {stockvalue}</p>
-<h2>Stock Movements</h2>
+<h2>Movements</h2>
 <div class="table">
     <table class="table table-condensed" id="movements">
         <tr>
@@ -31,7 +31,7 @@
 </div>
 
 
-<h2>Stock Transactions</h2>
+<h2>Transactions</h2>
 <div class="table">
     <table class="table table-condensed" id="transactions">
         <tr>

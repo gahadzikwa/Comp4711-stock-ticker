@@ -12,12 +12,13 @@ application/cache/*
 !application/cache/index.html
 !application/cache/.htaccess
 /application/config/database.php
-./.htaccess
+.htaccess
 
 */logs/log-*.php
 !*/logs/index.html
 application/logs/*
 !application/logs/index.html
+assets/images/avatars/*
 !application/logs/.htaccess
 
 user_guide_src/build/*

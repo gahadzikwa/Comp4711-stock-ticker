@@ -33,8 +33,8 @@ CREATE TABLE IF NOT EXISTS `players` (
   `Username` varchar(12) NOT NULL,
   `Password` varchar(64) NOT NULL,
   `Role` varchar(12) DEFAULT 'player',
-  `Avatar` varchar(64),
   `Cash` int DEFAULT 1000,
+  `Avatar` varchar(64) DEFAULT '/assets/images/avatars/default.jpg',
   PRIMARY KEY (Username)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -42,8 +42,12 @@ CREATE TABLE IF NOT EXISTS `players` (
 -- Dumping data for table `players`
 --
 
-INSERT INTO `players` (`Username`, `Password`, `Role`, `Avatar`, `Cash`) VALUES
-('Mickey', '$2y$10$uuYKSeNSudTSleojm38bseb/FL5c/GTIsRd4xo9eWX36OLrRdU./i', 'Admin', '', 1000);
+INSERT INTO `players` (`Username`, `Password`, `Role`, `Cash`) VALUES
+('mickey', '$2y$10$uuYKSeNSudTSleojm38bseb/FL5c/GTIsRd4xo9eWX36OLrRdU./i', 'Admin', 1000),
+('brandon', '$2y$10$uuYKSeNSudTSleojm38bseb/FL5c/GTIsRd4xo9eWX36OLrRdU./i', 'Player', 100000),
+('derrick', '$2y$10$uuYKSeNSudTSleojm38bseb/FL5c/GTIsRd4xo9eWX36OLrRdU./i', 'Player', 1000),
+('duy', '$2y$10$uuYKSeNSudTSleojm38bseb/FL5c/GTIsRd4xo9eWX36OLrRdU./i', 'Player', 1000),
+('clifton', '$2y$10$uuYKSeNSudTSleojm38bseb/FL5c/GTIsRd4xo9eWX36OLrRdU./i', 'Player', 1000);
 
 -- --------------------------------------------------------
 
@@ -57,6 +61,7 @@ CREATE TABLE IF NOT EXISTS `stockdistribution` (
   `Username` VARCHAR(12) NOT NULL,
   `Certificate` VARCHAR(20) NOT NULL,
   `Quantity` int NOT NULL,
+  `DateTime` TIMESTAMP NOT NULL,
   PRIMARY KEY (StockCode, Username, Certificate),
   FOREIGN KEY (Username) REFERENCES players(Username)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

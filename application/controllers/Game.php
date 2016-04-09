@@ -12,23 +12,20 @@ class Game extends Application {
 	public function index()
 	{
 		if ($this->session->userdata('user') !== null) {
-			$this->data['welcome'] = 'Welcome ' . $this->session->userdata('Player');
-			$this->data['stocks'] = $this->stocks->all();
-			$this->data['pagebody'] = 'gameplay';
-			$this->data['players'] = $this->players->all();
+			if($this->session->userdata('user')->Role == ROLE_ADMIN) {
+				redirect('agent/management');
+			}
+			else {
+				$user = $this->session->userdata('user');
 
-//			foreach( $this->players->allPlayersIncludeEquity() as $player)
-//			{
-//				$temp = array(
-//					'ID' => $player['ID'],
-//					'Player' => $player['Player'],
-//					'Cash' => $player['Cash'],
-//					'Equity' => $player['Equity'] !== null ? $player['Equity'] : '0'
-//				);
-//
-//				$this->data['players'][] = $temp;
-//			}
-
+				$this->data['pagebody'] = 'gameplay';
+				$this->data['stocks'] = $this->stocks->all();
+				$this->data['my_stocks'] = $this->stocks->getPlayerStocks($user->Username);
+				$this->data['current_player_username'] = $user->Username;
+				$this->data['current_player_cash'] = $user->Cash;
+				$this->data['current_player_equity'] = number_format($this->players->getPlayerEquity($user->Username));
+				$this->data['curent_player_avatar'] = $user->Avatar;
+			}
 		}
 		else {
 			$this->data['pagebody'] = 'welcome';

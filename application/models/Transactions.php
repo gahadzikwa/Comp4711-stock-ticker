@@ -67,11 +67,22 @@ class Transactions extends CI_Model {
 
     function getPlayerTransactions($playerId)
     {
-        $this->db->select('*');
-        $this->db->from('transactions');
-        $this->db->join('stocks', 'transactions.StockID = stocks.id');
-        $this->db->where('PlayerID=', $playerId);
-        $this->db->order_by("DateTime", "desc");
-        return $this->db->get()->result_array();
+        //get all arrays
+        $transactions = $this->all();
+
+        // create array for results
+        $result = array();
+
+        // loop through array
+        foreach ($transactions as $r)
+        {
+            // search array for code that matches stock id and put into result array
+            if ($r["player"] == $playerId)
+            {
+                $result[] = $r;
+            }
+        }
+
+        return $result;
     }
 }
