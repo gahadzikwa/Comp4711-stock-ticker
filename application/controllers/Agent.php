@@ -8,7 +8,7 @@
 class Agent extends Application
 {
     function __contruct() {
-        parent::__construct();
+        parent::__construct();  
     }
 
     public function game_status() {
@@ -42,6 +42,24 @@ class Agent extends Application
         // Check if stock_code exists
         // Check if qty is valid
         // Check if $player_name exists
+
+        $data_string = '/data/stocks';
+
+        $curl = curl_init();
+
+        curl_setopt($curl, CURLOPT_URL, BSX_URL . $data_string);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);  // Make it so the data coming back is put into a string
+        // curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);  // Insert the data
+
+        // Send the request
+        $result = curl_exec($curl);
+
+        // Free up the resources $curl is using
+        curl_close($curl);
+
+        var_dump($result);
+            
 
         // POST buy request
 

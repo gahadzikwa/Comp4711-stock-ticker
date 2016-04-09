@@ -77,13 +77,8 @@ $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 	'username' => 'root',
-<<<<<<< HEAD
 	'password' => '123',
-	'database' => 'whatever',
-=======
-	'password' => 'future',
 	'database' => 'stockticker',
->>>>>>> f9ee23b6abf744c2e708ab0bcc1096bcdcc94ad8
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => TRUE,
