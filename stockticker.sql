@@ -57,6 +57,7 @@ CREATE TABLE IF NOT EXISTS `stockdistribution` (
   `Username` VARCHAR(12) NOT NULL,
   `Certificate` VARCHAR(20) NOT NULL,
   `Quantity` int NOT NULL,
+  `DateTime` TIMESTAMP NOT NULL,
   PRIMARY KEY (StockCode, Username, Certificate),
   FOREIGN KEY (Username) REFERENCES players(Username)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
