@@ -8,8 +8,8 @@ class Account extends Application {
         parent::__construct();
         $this->load->model('players');
         $this->load->helper('form');
-//        $this->load->library('upload');
     }
+
     public function login()
     {
         $this->data['pagebody'] = 'login';
@@ -58,23 +58,25 @@ class Account extends Application {
     public function submitRegister() 
     {        
         $data = $this->input->post('username');
-        if($data == null) 
+
+        if($data == null)
         {
-            //redirect('/Account/register','refresh');
-        } 
+            redirect('/account/register','refresh');
+        }
+
         $player = $this->players->get($data);
         
         if($player != null) 
         {
-            redirect('/account','refresh');
+            redirect('/account/register','refresh');
         } 
         
-        $config['upload_path'] = 'assets/images/';
+        $config['upload_path'] = '/assets/images/avatars';
         $config['allowed_types'] = 'gif|jpg|png';
         $config['max_size'] = '0';
         $config['max_width'] = '0';
         $config['max_height'] = '0';
-        var_dump($config);
+
         $this->load->library('upload');
         $this->upload->initialize($config);
         
@@ -88,11 +90,11 @@ class Account extends Application {
         {
             
             $data = array(
-            'Username' => $data,
-            'Password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-            'Role' => 'User',
-            'Cash' => 1000,
-            'Avatar' => $this->upload->data()['full_path']
+                'Username' => $data,
+                'Password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+                'Role' => 'User',
+                'Cash' => 1000,
+                'Avatar' => $this->upload->data()['full_path']
             );
             
             $this->db->insert('players', $data);   

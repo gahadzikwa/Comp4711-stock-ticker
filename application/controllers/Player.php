@@ -20,14 +20,12 @@ class Player extends Application
 
         $this->data['playerList'] = $this->players->all();
         $user = $this->players->get($username);
-
-
         $this->data['current_player_username'] = $user->Username;
         $this->data['current_player_cash'] = $user->Cash;
 
-        //        $this->data['playerEquity'] = number_format($this->players->getPlayerEquity($username)[0]["Equity"]);
+//        $this->data['playerEquity'] = number_format($this->players->getPlayerEquity($username)[0]["Equity"]);
 //
-//        $this->data['holdings'] = $this->stocks->getPlayerStocks($username);
+        $this->data['holdings'] = $this->stocks->getPlayerStocks($username);
 //
 //        $tempTransactions = array();
 //

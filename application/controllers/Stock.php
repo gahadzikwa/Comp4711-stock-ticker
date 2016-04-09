@@ -13,19 +13,16 @@ class Stock extends Application
 
     public function index()
     {
-        $stocks = $this->stocks->all();
-
-        $this->stock($stocks[0]['code']);
+        $this->stock();
     }
 
-    public function stock($stockcode)
+    public function stock($stockcode = null)
     {
-        $this->session->set_userdata(array('$stockcode' => $stockcode));
-
-        // get stock information
-        $this->data['stockname'] = "FIX ME PLS";
-
         $this->data['stocks'] = $this->stocks->all();
+
+        $stockcode = $stockcode == null ? $this->data['stocks'][0]['code'] : $stockcode;
+
+        $this->data['stockname'] = "FIX ME PLS";
 
         // get stock movements
         $this->data['stockmovements'] = $this->movements->getStockMovements($stockcode);
