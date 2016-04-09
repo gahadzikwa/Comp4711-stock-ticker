@@ -87,3 +87,11 @@ defined('EXIT_USER_INPUT')     OR define('EXIT_USER_INPUT', 7); // invalid user 
 defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+
+
+/*
+ * Agent Data
+ */
+define('AGENT_TOKEN', '874814d1dc2db97a6c439f78135e39c5');
+define('TEAM_CODE', 'g01');
+define('BSX_URL', 'http://bsx.jlparry.com/');
