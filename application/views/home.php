@@ -11,10 +11,10 @@
         </tr>
         {stocks}
         <tr> 
-            <td><a href="/stock/stock/{ID}">{code}</a> </td>
-            <td><a href="/stock/stock/{ID}">{name}</a> </td>
-            <td><a href="/stock/stock/{ID}">{category}</a> </td>
-            <td><a href="/stock/stock/{ID}">{value}</a> </td>
+            <td><a href="/stock/stock/{code}">{code}</a> </td>
+            <td><a href="/stock/stock/{code}">{name}</a> </td>
+            <td><a href="/stock/stock/{code}">{category}</a> </td>
+            <td><a href="/stock/stock/{code}">{value}</a> </td>
         </tr>
         {/stocks}
     </table>

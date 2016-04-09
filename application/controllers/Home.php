@@ -32,19 +32,19 @@ class Home extends Application {
             $this->data['welcome'] = 'Welcome!  Please log in...';
         }
 
-        $this->data['players'] = array();
-
-        foreach( $this->players->allPlayersIncludeEquity() as $player)
-        {
-            $temp = array(
-                'ID' => $player['ID'],
-                'Player' => $player['Player'],
-                'Cash' => $player['Cash'],
-                'Equity' => $player['Equity'] !== null ? $player['Equity'] : '0'
-            );
-
-            $this->data['players'][] = $temp;
-        }
+//        $this->data['players'] = array();
+//
+//        foreach( $this->players->allPlayersIncludeEquity() as $player)
+//        {
+//            $temp = array(
+//                'ID' => $player['ID'],
+//                'Player' => $player['Player'],
+//                'Cash' => $player['Cash'],
+//                'Equity' => $player['Equity'] !== null ? $player['Equity'] : '0'
+//            );
+//
+//            $this->data['players'][] = $temp;
+//        }
 
         $this->data['stocks'] = $this->stocks->all();
         $this->data['pagebody'] = 'home';

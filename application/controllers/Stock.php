@@ -22,25 +22,18 @@ class Stock extends Application
     {
         $this->session->set_userdata(array('stockindex' => $id));
 
-        $this->data['stock'] = $this->stocks->get($id)[0];
-        $this->data['stockname'] = $this->data['stock']['Name'];
-        $this->data['stockvalue'] =$this->data['stock']['Value'] ;
-        $this->data['stockcode'] = $this->data['stock']['Code'];
+        // get stock information
+        $this->data['stockname'] = "FIX ME PLS";
 
         $this->data['stocks'] = $this->stocks->all();
-        $this->data['stockmovements'] = $this->movements->getStockMovements($id);;
 
-        $this->data['stocktransactions'] = array();
-        foreach($this->transactions->getStockTransactions($id) as $trans)
-        {
-            $temp = array('DateTime' => $trans['DateTime'],
-                'Player' => $trans['Player'],
-                'Quantity' => $trans['Quantity'],
-                'Trans' => $trans['Quantity'] >= 0 ? 'Buy' : 'Sell');
+        // get stock movements
+        $this->data['stockmovements'] = $this->movements->getStockMovements($id);
 
-            $this->data['stocktransactions'][] = $temp;
-        }
+        // get stock transactions
+        $this->data['stocktransactions'] = $this->transactions->getStockTransactions($id);
 
+        // load stockhistory view
         $this->data['pagebody'] = 'stockhistory';
         $this->render();
     }
