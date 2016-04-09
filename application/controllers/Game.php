@@ -13,7 +13,7 @@ class Game extends Application {
 	{
 		if ($this->session->userdata('user') !== null) {
 			if($this->session->userdata('user')->Role == ROLE_ADMIN) {
-				$this->data['pagebody'] = 'management';
+				redirect('agent/management');
 			}
 			else {
 				$user = $this->session->userdata('user');
