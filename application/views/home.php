@@ -1,5 +1,6 @@
 <h1>{welcome}</h1>
 <h2>Stocks</h2>
+<a href="/agent/game_status">Test</a>
 <div class="table-responsive"> 
     <table class="table">
         <tr>
@@ -36,3 +37,4 @@
         {/players}
     </table>
 </div>
+
