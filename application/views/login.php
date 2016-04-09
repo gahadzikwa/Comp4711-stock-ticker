@@ -1,11 +1,14 @@
 <h1>Sign In</h1>
-
-<div>
-    <form action="/account/submitLogin" method="post">
-        <label>Username:</label><br>
-        <input type="text" name="username"><br><br>
-        <label>Password:</label><br>
-        <input type="text" name="password"><br><br>
-        <input type="submit" value="Login">
+<div class="col-md-4">
+    <form role="form" action="/account/submitLogin" method="post">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" name="username" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" name="password">
+        </div>
+        <button type="submit" class="btn btn-default pull-right">Sign In</button>
     </form>
 </div>

@@ -25,33 +25,21 @@ class Players extends CI_Model
         return $this->db->get('players')->row();
     }
 
+    public function getPlayerEquity($username)
+    {
+        $this->db->select('*');
+        $this->db->where('username=', $username);
+        $result = $this->db->get('stockdistribution')->result();
 
+        $this->load->model('stocks');
+        $stocks = $this->stocks->all();
 
-//    public function allPlayersIncludeEquity()
-//    {
-//        return $this->db->query('SELECT players.ID, players.Player, players.Cash, SUM(temp.Total) AS \'Equity\' '
-//            . 'FROM players LEFT JOIN ('
-//            . 'SELECT stocks.Name, stockdistribution.PlayerID, '
-//            . 'SUM(stocks.Value*stockdistribution.Quantity) as \'Total\' '
-//            . 'FROM stocks INNER JOIN stockdistribution '
-//            . 'ON stocks.ID=stockdistribution.StockID '
-//            . 'GROUP BY stockdistribution.PlayerID, stocks.Name) AS  temp '
-//            . 'ON players.ID=temp.PlayerID '
-//            . 'GROUP BY players.ID')->result_array();
-//    }
+        $total = 0;
 
+        foreach($result as $r) {
 
-//    public function getPlayerEquity($id)
-//    {
-//        return $this->db->query('SELECT SUM(temp.Total) AS \'Equity\' '
-//            . 'FROM players LEFT JOIN ('
-//            . 'SELECT stocks.Name, stockdistribution.PlayerID, '
-//            . 'SUM(stocks.Value*stockdistribution.Quantity) as \'Total\' '
-//            . 'FROM stocks INNER JOIN stockdistribution '
-//            . 'ON stocks.ID=stockdistribution.StockID '
-//            . 'GROUP BY stockdistribution.PlayerID, stocks.Name) AS  temp '
-//            . 'ON players.ID=temp.PlayerID '
-//            . 'WHERE players.ID=\'' . $id . '\' '
-//            . 'GROUP BY players.ID')->result_array();
-//    }
+        }
+
+        return $total;
+    }
 }
