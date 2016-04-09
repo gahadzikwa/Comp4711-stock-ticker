@@ -1,7 +1,6 @@
 <h1>{welcome}</h1>
 <h2>Stocks</h2>
-<a href="/agent/game_status">Test</a>
-<div class="table-responsive"> 
+<div class="table-responsive">
     <table class="table">
         <tr>
             <th>Code</th>
@@ -11,10 +10,10 @@
         </tr>
         {stocks}
         <tr> 
-            <td><a href="/stock/stock/{ID}">{code}</a> </td>
-            <td><a href="/stock/stock/{ID}">{name}</a> </td>
-            <td><a href="/stock/stock/{ID}">{category}</a> </td>
-            <td><a href="/stock/stock/{ID}">{value}</a> </td>
+            <td><a href="/stock/stock/{code}">{code}</a> </td>
+            <td><a href="/stock/stock/{name}">{name}</a> </td>
+            <td><a href="/stock/stock/{category}">{category}</a> </td>
+            <td><a href="/stock/stock/{value}">{value}</a> </td>
         </tr>
         {/stocks}
     </table>
@@ -30,9 +29,9 @@
         </tr>
         {players}
         <tr> 
-            <td><a href="/player/player/{ID}">{Player}</a> </td>
-            <td><a href="/player/player/{ID}">{Cash}</a> </td>
-            <td><a href="/player/player/{ID}">{Equity}</a> </td>
+            <td><a href="/player/player/{Username}">{Username}</a> </td>
+            <td><a href="/player/player/{Cash}">{Cash}</a> </td>
+            <td><a href="/player/player/{Equity}">{Equity}</a> </td>
         </tr>
         {/players}
     </table>

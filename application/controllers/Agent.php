@@ -11,6 +11,12 @@ class Agent extends Application
         parent::__construct();
     }
 
+    public function management()
+    {
+        $this->data['pagebody'] = 'management';
+        $this->render();
+    }
+
     public function game_status() {
         $this->load->model('Gamestatus');
 
