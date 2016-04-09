@@ -17,5 +17,8 @@
         <li>
             <a href="{loghref}">{loginout}</a>
         </li>
+        <li>
+            <a href="/Account/register">Register</a>
+        </li>
     </ul>
 </div>

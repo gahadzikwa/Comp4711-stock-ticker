@@ -11,23 +11,18 @@
  */
 class Application extends CI_Controller {
 
-	protected $data = array();	  // parameters for view components
-	protected $id;				  // identifier for our content
-
-	/**
-	 * Constructor.
-	 * Establish view parameters & load common helpers
-	 */
-
-	function __construct()
-	{
-		parent::__construct();
-
-		$this->data = array();
-		$this->errors = array();
-
+    protected $data = array();	  // parameters for view components
+    protected $id;				  // identifier for our content
+    /**
+     * Constructor.
+     * Establish view parameters & load common helpers
+     */
+    function __construct()
+    {
+        parent::__construct();
+        $this->data = array();
+        $this->errors = array();
         $this->data['title'] = 'Stock Ticker';
-
         if($this->session->userdata('Player') !== null)
         {
             $this->data['loginout'] = 'Log Out';
@@ -38,21 +33,29 @@ class Application extends CI_Controller {
             $this->data['loginout'] = 'Log In';
             $this->data['loghref'] = '/account';
         }
-
         $this->data['sidemenu'] = $this->parser->parse('_sidemenu', $this->data, true);
-    }
-
-	/**
-	 * Render this page
-	 */
-	function render()
-	{
+    }   
+//    //generates sidebar menu depending on what role of current user
+//    function makemenu() {
+//        $userRole = $this->session->userdata('userrole');
+//        $choices = array();
+//        $choices[] = array('name' => 'Home', 'link' => '/');
+//        if($userRole == ROLE_ADMIN) {
+//            
+//        } else if($userRole == ROLE_USER) {
+//            
+//        }
+//    }
+    /**
+     * Render this page
+     */
+    function render()
+    {
         $this->data['content'] = $this->parser->parse($this->data['pagebody'], $this->data, true);
-
-		// finally, build the browser page!
-		$this->data['data'] = &$this->data;
-		$this->parser->parse('_template', $this->data);
-	}
+        // finally, build the browser page!
+        $this->data['data'] = &$this->data;
+        $this->parser->parse('_template', $this->data);
+    }
 }
 
 /* End of file MY_Controller.php */
