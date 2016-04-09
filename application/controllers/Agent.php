@@ -13,6 +13,9 @@ class Agent extends Application
 
     public function management()
     {
+        $this->load->model('players');
+        $this->data['players'] = $this->players->all();
+
         $this->data['pagebody'] = 'management';
         $this->render();
     }
@@ -140,6 +143,31 @@ class Agent extends Application
     }
 
     public function sell() {
+
+    }
+
+    public function register_agent() {
+        $params = array(
+            'team' => TEAM_CODE,
+            'token' => AGENT_TOKEN,
+            'player' => $player->Username,
+            'stock' => $stock_code,
+            'quantity' => $qty,
+        );
+
+        $curl = curl_init();
+
+        curl_setopt($curl, CURLOPT_URL, BSX_URL . '/buy');
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
+        // Process the return output from the API
+        $xml_resp = new SimpleXMLElement($response);
 
     }
 }
