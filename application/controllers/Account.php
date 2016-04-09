@@ -8,7 +8,7 @@ class Account extends Application {
         parent::__construct();
         $this->load->model('players');
         $this->load->helper('form');
-        $this->load->library('upload');
+//        $this->load->library('upload');
     }
     public function index()
     {
@@ -48,29 +48,46 @@ class Account extends Application {
      */
     public function submitRegister() 
     {        
-        $config['upload_path'] = './uploads/';
-        $config['allowed_types'] = gif|jpg|png;
-        $config['max_size'] = '100';
-        $config['max_width'] = '1024';
-        $config['max_height'] = '768';
-        
         $data = $this->input->post('username');
+        if($data == null) 
+        {
+            //redirect('/Account/register','refresh');
+        } 
         $player = $this->players->get($data);
+        
         if($player != null) 
         {
-            redirect('/Account','refresh');
+            //redirect('/Account/register','refresh');
         } 
+        
+        $config['upload_path'] = 'assets/images/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = '0';
+        $config['max_width'] = '0';
+        $config['max_height'] = '0';
+        var_dump($config);
+        $this->load->library('upload');
+        $this->upload->initialize($config);
+        
+        if(!$this->upload->do_upload()) {
+            
+            $error = array('error' => $this->upload->display_errors());
+            $this->load->view('register',$error);
+            
+        }
         else 
         {
+            
             $data = array(
             'Username' => $data,
             'Password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
             'Role' => 'User',
             'Cash' => 1000,
-            'Avatar' => $this->input->post('avatar')
-        );
-        $this->db->insert('players', $data);   
-        $this->submitLogin();
+            'Avatar' => $this->upload->data()['full_path']
+            );
+            
+            $this->db->insert('players', $data);   
+            $this->submitLogin();
         }        
     }
 

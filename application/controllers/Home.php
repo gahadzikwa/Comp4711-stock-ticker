@@ -41,7 +41,7 @@ class Home extends Application {
             $temp = array(
                 'Player' => $player['Username'],
                 'Cash' => $player['Cash'],
-                'Equity' => $player['Equity'] !== null ? $player['Equity'] : '0'
+                //'Equity' => $player['Equity'] !== null ? $player['Equity'] : '0'
             );
 
             $this->data['players'][] = $temp;

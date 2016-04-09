@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `players` (
   `Password` varchar(64) NOT NULL,
   `Role` varchar(12) DEFAULT 'player',
   `Cash` int DEFAULT 1000,
+  `Avatar` varchar(64) NOT NULL,
   PRIMARY KEY (Username)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
