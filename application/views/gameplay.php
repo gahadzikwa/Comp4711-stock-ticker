@@ -11,9 +11,9 @@
         {stocks}
         <tr> 
             <td><a href="/stock/stock/{code}">{code}</a> </td>
-            <td><a href="/stock/stock/{name}">{name}</a> </td>
-            <td><a href="/stock/stock/{category}">{category}</a> </td>
-            <td><a href="/stock/stock/{value}">{value}</a> </td>
+            <td><a href="/stock/stock/{code}">{name}</a> </td>
+            <td><a href="/stock/stock/{code}">{category}</a> </td>
+            <td><a href="/stock/stock/{code}">{value}</a> </td>
         </tr>
         {/stocks}
     </table>
@@ -30,8 +30,8 @@
         {players}
         <tr> 
             <td><a href="/player/player/{Username}">{Username}</a> </td>
-            <td><a href="/player/player/{Cash}">{Cash}</a> </td>
-            <td><a href="/player/player/{Equity}">{Equity}</a> </td>
+            <td><a href="/player/player/{Username}">{Cash}</a> </td>
+            <td><a href="/player/player/{Username}">{Equity}</a> </td>
         </tr>
         {/players}
     </table>

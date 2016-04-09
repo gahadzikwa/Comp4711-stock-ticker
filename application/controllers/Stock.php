@@ -13,39 +13,27 @@ class Stock extends Application
 
     public function index()
     {
-        if($this->session->userdata('stockcode') == null) {
-            $this->stock($this->stocks->all()[0]->code);
-        }
-        else {
-            //$this->stock($this->stocks->all()[0]->code);
-            $this->stock($this->session->userdata('stockcode'));
-        }
+        $stocks = $this->stocks->all();
+
+        $this->stock($stocks[0]['code']);
     }
 
     public function stock($stockcode)
     {
         $this->session->set_userdata(array('$stockcode' => $stockcode));
 
+        // get stock information
+        $this->data['stockname'] = "FIX ME PLS";
+
         $this->data['stocks'] = $this->stocks->all();
-        $this->data['stock'] = $this->stocks->get($stockcode)[0];
-        $this->data['stockname'] = $this->data['stock']['Name'];
-        $this->data['stockvalue'] =$this->data['stock']['Value'] ;
-        $this->data['stockcode'] = $this->data['stock']['Code'];
 
-//        $this->data['stockmovements'] = $this->movements->getStockMovements($stockcode);;
-//
-//        $this->data['stocktransactions'] = array();
-//
-//        foreach($this->transactions->getStockTransactions($stockcode) as $trans)
-//        {
-//            $temp = array('DateTime' => $trans['DateTime'],
-//                'Player' => $trans['Player'],
-//                'Quantity' => $trans['Quantity'],
-//                'Trans' => $trans['Quantity'] >= 0 ? 'Buy' : 'Sell');
-//
-//            $this->data['stocktransactions'][] = $temp;
-//        }
+        // get stock movements
+        $this->data['stockmovements'] = $this->movements->getStockMovements($stockcode);
 
+        // get stock transactions
+        $this->data['stocktransactions'] = $this->transactions->getStockTransactions($stockcode);
+
+        // load stockhistory view
         $this->data['pagebody'] = 'stockhistory';
         $this->render();
     }

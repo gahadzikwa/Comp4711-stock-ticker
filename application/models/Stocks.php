@@ -34,11 +34,24 @@ class Stocks extends CI_Model {
         return $result;
     }
 
-    function get($stockcode)
+    // returns an array of stocks
+    function get($id)
     {
-//        $this->db->select('*');
-//        $this->db->where('ID=', $stockcode);
-//        return $this->db->get('stocks')->result_array();
+        //get all arrays
+        $stocks = $this->all();
+        // create array for results
+        $result = array();
+        // loop through array
+        foreach ($stocks as $r)
+        {
+            // search array for code that matches stock id and put into result array
+            if ($r["code"] == $id)
+            {
+                $result[] = $r;
+            }
+        }
+
+        return $result;
     }
 
     function getPlayerStocks($playerId)
