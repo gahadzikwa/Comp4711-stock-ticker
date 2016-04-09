@@ -22,9 +22,16 @@ class Stock extends Application
     {
         $this->session->set_userdata(array('$stockcode' => $stockcode));
 
-        // get stock information
-        $this->data['stockname'] = "FIX ME PLS";
+        // get stock name
+        $this->data['stockname'] = $this->stocks->getStockName($stockcode, "stockname");
 
+        // get stock code
+        $this->data['stockcode'] = $this->stocks->getStockName($stockcode, "stockcode");
+        
+        // get stock value
+        $this->data['stockvalue'] = $this->stocks->getStockName($stockcode, "stockvalue");
+
+        // get value for stock list
         $this->data['stocks'] = $this->stocks->all();
 
         // get stock movements
