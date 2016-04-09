@@ -12,11 +12,13 @@ class Agent extends Application
     }
 
     public function game_status() {
+        $this->load->model('Gamestatus');
+
         // 1. initialize
         $curly = curl_init();
 
         // 2. set the options, including the url
-        curl_setopt($curly, CURLOPT_URL, BSX_URL);
+        curl_setopt($curly, CURLOPT_URL, BSX_URL . 'status');
         curl_setopt($curly, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curly, CURLOPT_HEADER, 0);
 
@@ -28,12 +30,15 @@ class Agent extends Application
 
         $xml_resp = new SimpleXMLElement($response);
 
-        foreach($xml_resp->entry as $oEntry){
-            echo $oEntry . '\n';
-        }
+        $gamestatus = new GameStatus(
+            $xml_resp->state->__toString(),
+            $xml_resp->round->__toString(),
+            $xml_resp->countdown->__toString(),
+            $xml_resp->desc->__toString()
+        );
 
-        // Check response status
-        var_dump($xml_resp);
+        header('Content-Type: application/json');
+        echo json_encode( $gamestatus );
     }
 
     public function buy($stock_code, $qty, $player_name) {
