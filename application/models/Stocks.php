@@ -32,28 +32,21 @@ class Stocks extends CI_Model {
         }
 
         return $result;
-
-
     }
 
-    function headers()
+    function get($stockcode)
     {
-        return $this->db->list_fields('stocks');
-    }
-
-    function get($id)
-    {
-        $this->db->select('*');
-        $this->db->where('ID=', $id);
-        return $this->db->get('stocks')->result_array();
+//        $this->db->select('*');
+//        $this->db->where('ID=', $stockcode);
+//        return $this->db->get('stocks')->result_array();
     }
 
     function getPlayerStocks($playerId)
     {
-        $this->db->select('*');
-        $this->db->from('stockdistribution');
-        $this->db->join('stocks', 'stockdistribution.StockID=stocks.ID');
-        $this->db->where('PlayerID=', $playerId);
-        return $this->db->get()->result_array();
+//        $this->db->select('*');
+//        $this->db->from('stockdistribution');
+//        $this->db->join('stocks', 'stockdistribution.StockID=stocks.ID');
+//        $this->db->where('PlayerID=', $playerId);
+//        return $this->db->get()->result_array();
     }
 }

@@ -13,33 +13,38 @@ class Stock extends Application
 
     public function index()
     {
-        // TODO: Replace magic 1 with a method to find the highest ID
-        $index = $this->session->userdata('stockindex') > 0 ? $this->session->userdata('stockindex') : 1;
-        $this->stock($index);
+        if($this->session->userdata('stockcode') == null) {
+            $this->stock($this->stocks->all()[0]->code);
+        }
+        else {
+            //$this->stock($this->stocks->all()[0]->code);
+            $this->stock($this->session->userdata('stockcode'));
+        }
     }
 
-    public function stock($id)
+    public function stock($stockcode)
     {
-        $this->session->set_userdata(array('stockindex' => $id));
+        $this->session->set_userdata(array('$stockcode' => $stockcode));
 
-        $this->data['stock'] = $this->stocks->get($id)[0];
+        $this->data['stocks'] = $this->stocks->all();
+        $this->data['stock'] = $this->stocks->get($stockcode)[0];
         $this->data['stockname'] = $this->data['stock']['Name'];
         $this->data['stockvalue'] =$this->data['stock']['Value'] ;
         $this->data['stockcode'] = $this->data['stock']['Code'];
 
-        $this->data['stocks'] = $this->stocks->all();
-        $this->data['stockmovements'] = $this->movements->getStockMovements($id);;
-
-        $this->data['stocktransactions'] = array();
-        foreach($this->transactions->getStockTransactions($id) as $trans)
-        {
-            $temp = array('DateTime' => $trans['DateTime'],
-                'Player' => $trans['Player'],
-                'Quantity' => $trans['Quantity'],
-                'Trans' => $trans['Quantity'] >= 0 ? 'Buy' : 'Sell');
-
-            $this->data['stocktransactions'][] = $temp;
-        }
+//        $this->data['stockmovements'] = $this->movements->getStockMovements($stockcode);;
+//
+//        $this->data['stocktransactions'] = array();
+//
+//        foreach($this->transactions->getStockTransactions($stockcode) as $trans)
+//        {
+//            $temp = array('DateTime' => $trans['DateTime'],
+//                'Player' => $trans['Player'],
+//                'Quantity' => $trans['Quantity'],
+//                'Trans' => $trans['Quantity'] >= 0 ? 'Buy' : 'Sell');
+//
+//            $this->data['stocktransactions'][] = $temp;
+//        }
 
         $this->data['pagebody'] = 'stockhistory';
         $this->render();

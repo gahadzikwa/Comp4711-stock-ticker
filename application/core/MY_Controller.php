@@ -23,29 +23,27 @@ class Application extends CI_Controller {
         $this->data = array();
         $this->errors = array();
         $this->data['title'] = 'Stock Ticker';
-        if($this->session->userdata('Player') !== null)
+
+        if($this->session->userdata('user') !== null)
         {
-            $this->data['loginout'] = 'Log Out';
-            $this->data['loghref'] = '/account/logout';
+			$this->data['menu_items'] = array(
+				array('name' => "Game", 'link' => '/game'),
+				array('name' => "Players", 'link' => '/player'),
+				array('name' => "Stocks", 'link' => '/stock'),
+				array('name' => "Sign Out", 'link' => '/account/logout')
+			);
         }
         else
         {
-            $this->data['loginout'] = 'Log In';
-            $this->data['loghref'] = '/account';
+			$this->data['menu_items'] = array(
+				array('name' => "Welcome", 'link' => '/game'),
+				array('name' => "Register", 'link' => '/account/register'),
+				array('name' => "Sign In", 'link' => '/account/login'),
+			);
         }
         $this->data['sidemenu'] = $this->parser->parse('_sidemenu', $this->data, true);
     }   
-//    //generates sidebar menu depending on what role of current user
-//    function makemenu() {
-//        $userRole = $this->session->userdata('userrole');
-//        $choices = array();
-//        $choices[] = array('name' => 'Home', 'link' => '/');
-//        if($userRole == ROLE_ADMIN) {
-//            
-//        } else if($userRole == ROLE_USER) {
-//            
-//        }
-//    }
+
     /**
      * Render this page
      */
