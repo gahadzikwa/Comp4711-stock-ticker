@@ -17,7 +17,15 @@ class Players extends CI_Model
     {
         return $this->db->get('players')->result_array();
     }
-   
+
+    public function get($username)
+    {
+        $this->db->select('*');
+        $this->db->where('username=', $username);
+        return $this->db->get('players')->row();
+    }
+
+
 
 //    public function allPlayersIncludeEquity()
 //    {
@@ -32,12 +40,6 @@ class Players extends CI_Model
 //            . 'GROUP BY players.ID')->result_array();
 //    }
 
-    public function get($id)
-    {
-        $this->db->select('*');
-        $this->db->where('username=', $id);
-        return $this->db->get('players')->row();
-    }
 
 //    public function getPlayerEquity($id)
 //    {

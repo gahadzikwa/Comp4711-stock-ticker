@@ -13,36 +13,38 @@ class Player extends Application
 
     public function index()
     {
-        // TODO: Replace magic 1 with a method to find the highest ID
-        $index = $this->session->userdata('ID') !== null ? $this->session->userdata('ID') : 1;
-        $this->player($index);
+        $this->player($this->session->userdata('user')->Username);
     }
 
-    public function player($id)
-    {
+    public function player($username) {
+
         $this->data['playerList'] = $this->players->all();
+        $user = $this->players->get($username);
 
-        $this->data['currentPlayer'] = $this->players->get($id);
 
-        $this->data['playerEquity'] = number_format($this->players->getPlayerEquity($id)[0]["Equity"]);
+        $this->data['current_player_username'] = $user->Username;
+        $this->data['current_player_cash'] = $user->Cash;
 
-        $this->data['holdings'] = $this->stocks->getPlayerStocks($id);
+        //        $this->data['playerEquity'] = number_format($this->players->getPlayerEquity($username)[0]["Equity"]);
+//
+//        $this->data['holdings'] = $this->stocks->getPlayerStocks($username);
+//
+//        $tempTransactions = array();
+//
+//        foreach($this->transactions->getPlayerTransactions($username) as $trans)
+//        {
+//            $temp = array('DateTime' => $trans['DateTime'],
+//                          'Name' => $trans['Name'],
+//                          'Quantity' => $trans['Quantity'],
+//                          'Trans' => $trans['Quantity'] >= 0 ? 'Buy' : 'Sell');
+//
+//             $tempTransactions[] = $temp;
+//        }
+//
+//        $this->data['transactions'] = $tempTransactions;
 
-        $tempTransactions = array();
-        foreach($this->transactions->getPlayerTransactions($id) as $trans)
-        {
-            $temp = array('DateTime' => $trans['DateTime'],
-                          'Name' => $trans['Name'],
-                          'Quantity' => $trans['Quantity'],
-                          'Trans' => $trans['Quantity'] >= 0 ? 'Buy' : 'Sell');
-
-             $tempTransactions[] = $temp;
-        }
-
-        $this->data['transactions'] = $tempTransactions;
 
         $this->data['pagebody'] = 'player';
-        
         $this->render();
     }
     

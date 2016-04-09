@@ -10,7 +10,7 @@ class Account extends Application {
         $this->load->helper('form');
 //        $this->load->library('upload');
     }
-    public function index()
+    public function login()
     {
         $this->data['pagebody'] = 'login';
         $this->render();
@@ -20,20 +20,29 @@ class Account extends Application {
     public function submitLogin()
     {
         $data = $this->input->post('username');
-        $player = $this->players->get($data);
-        if($player == null) 
+
+        if($data == null)
         {
-            redirect('/Account','refresh');
+            redirect('/account','refresh');
         }
+
+        $player = $this->players->get($data);
+
+        if($player == null)
+        {
+            redirect('/account','refresh');
+        }
+
         if (password_verify($this->input->post('password'),$player->Password)) 
         {
-            $this->session->set_userdata('username',$data);
-            $this->session->set_userdata('userrole',$player->Role);
-        } else 
-        {
-            redirect('/Account','refresh');
+            $this->session->set_userdata('user', $player);
         }
-        redirect('/Home', 'refresh');
+        else
+        {
+            redirect('/account','refresh');
+        }
+
+        redirect('/game', 'refresh');
     }
     
     public function register() 
@@ -57,7 +66,7 @@ class Account extends Application {
         
         if($player != null) 
         {
-            //redirect('/Account/register','refresh');
+            redirect('/account','refresh');
         } 
         
         $config['upload_path'] = 'assets/images/';
@@ -94,6 +103,6 @@ class Account extends Application {
     public function logout()
     {
         $this->session->sess_destroy();
-        redirect('/Home', 'refresh');
+        redirect('/game', 'refresh');
     }
 }

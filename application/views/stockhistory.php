@@ -5,7 +5,7 @@
         <span class="caret"></span></button>
     <ul class="dropdown-menu">
         {stocks}
-        <li><a href="/stock/stock/{ID}">{Code}</a></li>
+        <li><a href="/stock/stock/{code}">{code}</a></li>
         {/stocks}
     </ul>
 </div>
@@ -15,14 +15,16 @@
     <table class="table table-condensed" id="movements">
         <tr>
             <th>Date/Time</th>
+            <th>Code</th>
             <th>Action</th>
             <th>Amount</th>
         </tr>
         {stockmovements}
         <tr>
-            <td>{Datetime}</td>
-            <td><img src="/assets/images/{Action}.png" alt="Smiley face" height="42"></td>
-            <td>{Amount}</td>
+            <td>{datetime}</td>
+            <td>{code}</td>
+            <td><img src="/assets/images/{action}.png" alt="Smiley face" height="42"></td>
+            <td>{amount}</td>
         </tr>
         {/stockmovements}
     </table>
@@ -34,16 +36,20 @@
     <table class="table table-condensed" id="transactions">
         <tr>
             <th>Date/Time</th>
+            <th>Agent</th>
             <th>Player</th>
+            <th>Stock</th>
             <th>Transaction</th>
             <th>Quantity</th>
         </tr>
         {stocktransactions}
         <tr>
-            <td>{DateTime}</td>
-            <td>{Player}</td>
-            <td>{Trans}</td>
-            <td>{Quantity}</td>
+            <td>{datetime}</td>
+            <td>{agent}</td>
+            <td>{player}</td>
+            <td>{stock}</td>
+            <td>{trans}</td>
+            <td>{quantity}</td>
         </tr>
         {/stocktransactions}
     </table>
