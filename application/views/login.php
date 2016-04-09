@@ -1,7 +1,7 @@
-<h1>Log In</h1>
+<h1>Sign In</h1>
 
 <div>
-    <form action="account/submitLogin" method="post">
+    <form action="/account/submitLogin" method="post">
         <label>Username:</label><br>
         <input type="text" name="username"><br><br>
         <label>Password:</label><br>

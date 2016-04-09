@@ -77,7 +77,11 @@ $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 	'username' => 'root',
+<<<<<<< HEAD
 	'password' => '123',
+=======
+	'password' => '',
+>>>>>>> 305a852eb9a2da128658316cc22c5570ac8fcfcf
 	'database' => 'stockticker',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

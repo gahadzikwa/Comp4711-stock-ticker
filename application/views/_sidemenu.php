@@ -1,24 +1,14 @@
 <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
         <li class="sidebar-brand">
-            <a href="/home">
+            <a href="/game">
                 STOCK TICKER
             </a>
         </li>
+        {menu_items}
         <li>
-            <a href="/home">Home</a>
+            <a href="{link}">{name}</a>
         </li>
-        <li>
-            <a href="/stock">Stocks</a>
-        </li>
-        <li>
-            <a href="/player">Player Profile</a>
-        </li>
-        <li>
-            <a href="{loghref}">{loginout}</a>
-        </li>
-        <li>
-            <a href="/Account/register">Register</a>
-        </li>
+        {/menu_items}
     </ul>
 </div>
