@@ -24,7 +24,7 @@ class Account extends Application {
 
         if($player !== null)
         {
-            $this->session->set_userdata($player);
+            $this->session->set_userdata('UID', $player);
             redirect('/Home', 'refresh');
         }
 

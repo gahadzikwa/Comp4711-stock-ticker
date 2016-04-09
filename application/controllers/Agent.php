@@ -41,8 +41,13 @@ class Agent extends Application
         echo json_encode( $gamestatus );
     }
 
-    public function buy($stock_code, $qty) {
+    public function buy($stock_code, $qty) 
+    {
+        // Validate user data
+        if (! $player = $this->session->userdata('UID'))
+            return;
 
+        var_dump($player);
         // Validate data
         // Check if stock_code exists
         // Check if qty is valid
@@ -82,8 +87,33 @@ class Agent extends Application
         // return a string message if stock code or quantity is invalid
         if(isset($result))
             var_dump($result);
+            // return;
+        
 
         // POST buy request
+        $data_string = '/buy';
+
+        $params = array(
+            'team' => TEAM_CODE,
+            'token' => AGENT_TOKEN,
+            'player' => $player,
+            'stock' => $stock_code,
+            'quantity' => $qty,
+         );
+
+        $curl = curl_init();
+
+        curl_setopt($curl, CURLOPT_URL, BSX_URL . $data_string);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); 
+
+        $output = curl_exec($curl);
+
+        curl_close($curl);
+
+        // Process the return output from the API        
+        var_dump($output);     
 
         // Check response status
         // If response good store data into stockdistribution table
