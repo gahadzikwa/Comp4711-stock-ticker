@@ -41,30 +41,47 @@ class Agent extends Application
         echo json_encode( $gamestatus );
     }
 
-    public function buy($stock_code, $qty, $player_name) {
+    public function buy($stock_code, $qty) {
 
         // Validate data
         // Check if stock_code exists
         // Check if qty is valid
-        // Check if $player_name exists
-
+        // 
         $data_string = '/data/stocks';
 
         $curl = curl_init();
 
         curl_setopt($curl, CURLOPT_URL, BSX_URL . $data_string);
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);  // Make it so the data coming back is put into a string
-        // curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);  // Insert the data
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); 
+        // curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
 
-        // Send the request
-        $result = curl_exec($curl);
+        $output = curl_exec($curl);
 
-        // Free up the resources $curl is using
         curl_close($curl);
 
-        var_dump($result);
-            
+        // Process the return output from the API        
+        $csv = str_getcsv($output, "\n");
+        
+        $header = str_getcsv($csv[0], ",");
+        
+        for ($i = 1; $i < count($csv); $i++){
+        
+            $row = str_getcsv($csv[$i], ",");
+
+            $row_result = array();
+
+            for ($j=0; $j < count($row); $j++) { 
+                $row_result[$header[$j]] = $row[$j];
+            }
+
+            if (strcmp($row_result["code"], $stock_code) == 0 && $row_result['value'] >= $qty)
+                $result = $row_result;
+        }
+
+        // return a string message if stock code or quantity is invalid
+        if(isset($result))
+            var_dump($result);
 
         // POST buy request
 
