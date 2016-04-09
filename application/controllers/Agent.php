@@ -41,13 +41,14 @@ class Agent extends Application
         echo json_encode( $gamestatus );
     }
 
-    public function buy($stock_code, $qty) 
+    public function buy($stock_code, $qty, $value) 
     {
         // Validate user data
-        if (! $player = $this->session->userdata('username'))
+        if (! $player = $this->session->userdata('username')){
+            echo json_encode(array('message' => 'Please Sign In'));
             return;
+        }
 
-        var_dump($player);
         // Validate data
         // Check if stock_code exists
         // Check if qty is valid
@@ -80,14 +81,16 @@ class Agent extends Application
                 $row_result[$header[$j]] = $row[$j];
             }
 
-            if (strcmp($row_result["code"], $stock_code) == 0 && $row_result['value'] >= $qty)
+            if (strcmp($row_result["code"], $stock_code) == 0 && $row_result['value'] == $value)
                 $result = $row_result;
         }
 
         // return a string message if stock code or quantity is invalid
-        if(isset($result))
-            var_dump($result);
-            // return;
+        if( !isset($result) )
+        {
+            echo json_encode(array('message' => 'Stock code or quantity is invalid'));
+            return;
+        }
         
 
         // POST buy request
@@ -113,23 +116,21 @@ class Agent extends Application
         curl_close($curl);
 
         // Process the return output from the API        
-        var_dump($output);     
+        $xml_resp = new SimpleXMLElement($output);
 
-        // Check response status
-        // If response good store data into stockdistribution table
-        // else return an error
+        // If error occur return error, otherwise insert the certificate into database and return success messsage
+        if ( !empty($xml_resp->error))
+            echo json_encode( $xml_resp );
+        else {
+            // Insert certificate into database
 
-        /*
-            <?xml version="1.0"?>
-            <certificate>
-                <token>9ff24</token>
-                <stock>BOND</stock>
-                <agent>g01</agent>
-                <player>poop_face</player>
-                <amount>5</amount>
-                <datetime>2016-04-08T16:57:01-04:00</datetime>
-            </certificate>
-         */
+            echo json_encode( array(
+                    'message' => 'success',
+                    'datetime' => $xml_resp->datetime->__toString()
+            ) );
+        }
+
+        return;
     }
 
     public function sell() {
