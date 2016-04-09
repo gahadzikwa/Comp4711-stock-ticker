@@ -2,6 +2,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends Application {
+    function __construct() {
+        parent::__construct();
+        $this->load->model('players');
+    }
 
 	/**
 	 * Index Page for this controller.
@@ -20,8 +24,6 @@ class Home extends Application {
 	 */
 	public function index()
 	{        
-        $this->load->model('stocks');
-        $this->load->model('players');
 
         if($this->session->userdata('Player') !== null)
         {
@@ -34,11 +36,10 @@ class Home extends Application {
 
         $this->data['players'] = array();
 
-        foreach( $this->players->allPlayersIncludeEquity() as $player)
+        foreach( $this->players->all() as $player)
         {
             $temp = array(
-                'ID' => $player['ID'],
-                'Player' => $player['Player'],
+                'Player' => $player['Username'],
                 'Cash' => $player['Cash'],
                 'Equity' => $player['Equity'] !== null ? $player['Equity'] : '0'
             );
@@ -46,7 +47,7 @@ class Home extends Application {
             $this->data['players'][] = $temp;
         }
 
-        $this->data['stocks'] = $this->stocks->all();
+//        $this->data['stocks'] = $this->stocks->all();
         $this->data['pagebody'] = 'home';
         $this->render();
 	}

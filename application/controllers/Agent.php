@@ -44,7 +44,7 @@ class Agent extends Application
     public function buy($stock_code, $qty) 
     {
         // Validate user data
-        if (! $player = $this->session->userdata('UID'))
+        if (! $player = $this->session->userdata('username'))
             return;
 
         var_dump($player);
