@@ -146,18 +146,16 @@ class Agent extends Application
 
     }
 
-    public function register_agent() {
+    public function register_agent($teamid, $teamname, $password) {
         $params = array(
-            'team' => TEAM_CODE,
-            'token' => AGENT_TOKEN,
-            'player' => $player->Username,
-            'stock' => $stock_code,
-            'quantity' => $qty,
+            'team' => $teamid,
+            'name' => $teamname,
+            'password' => $password,
         );
 
         $curl = curl_init();
 
-        curl_setopt($curl, CURLOPT_URL, BSX_URL . '/buy');
+        curl_setopt($curl, CURLOPT_URL, BSX_URL . '/register');
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -169,5 +167,11 @@ class Agent extends Application
         // Process the return output from the API
         $xml_resp = new SimpleXMLElement($response);
 
+        echo $response;
+    }
+
+    public function delete_player($username) {
+        $this->load->model('players');
+        echo $this->players->remove($username);
     }
 }

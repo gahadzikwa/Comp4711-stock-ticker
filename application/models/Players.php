@@ -8,11 +8,6 @@ class Players extends CI_Model
         parent::__construct();
     }
 
-    public function headers()
-    {
-        return $this->db->list_fields('players');
-    }
-
     public function all()
     {
         return $this->db->get('players')->result_array();
@@ -41,5 +36,10 @@ class Players extends CI_Model
         }
 
         return $total;
+    }
+
+    public function remove($username) {
+        $this->db->where('username', $username);
+        $this->db->delete('players');
     }
 }
