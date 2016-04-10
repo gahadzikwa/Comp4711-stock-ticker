@@ -92,6 +92,6 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 /*
  * Agent Data
  */
-define('AGENT_TOKEN', '874814d1dc2db97a6c439f78135e39c5');
+define('AGENT_TOKEN', 'ac433a91fb5dee15c8df1ad7d39f8f73');
 define('TEAM_CODE', 'g01');
 define('BSX_URL', 'http://bsx.jlparry.com/');
