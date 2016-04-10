@@ -71,7 +71,7 @@ class Account extends Application {
             redirect('/account/register','refresh');
         } 
         
-        $config['upload_path'] = '/assets/images/avatars';
+        $config['upload_path'] = 'assets/images/avatars';
         $config['allowed_types'] = 'gif|jpg|png';
         $config['max_size'] = '0';
         $config['max_width'] = '0';
