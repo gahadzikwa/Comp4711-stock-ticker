@@ -18,11 +18,23 @@ class Stock extends Application
 
     public function stock($stockcode = null)
     {
-        $this->data['stocks'] = $this->stocks->all();
-
+        // get stock code for current page
         $stockcode = $stockcode == null ? $this->data['stocks'][0]['code'] : $stockcode;
 
-        $this->data['stockname'] = "FIX ME PLS";
+        $this->data['stocks'] = $this->stocks->all();
+
+        // get stock name
+        $this->data['stockname'] = $this->stocks->getStockName($stockcode, "stockname");
+
+        // get stock code
+        $this->data['stockcode'] = $this->stocks->getStockName($stockcode, "stockcode");
+        
+        // get stock value
+        $this->data['stockvalue'] = $this->stocks->getStockName($stockcode, "stockvalue");
+
+        // get value for stock list
+        $this->data['stocks'] = $this->stocks->all();
+
 
         // get stock movements
         $this->data['stockmovements'] = $this->movements->getStockMovements($stockcode);
