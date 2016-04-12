@@ -11,10 +11,6 @@
             <label for="password">Password:</label>
             <input type="password" class="form-control" name="password">
         </div>
-        <div class="form-group">
-            <label for=avatar">Avatar:</label>
-            <input type="file" name="userfile" accept="image/*">
-        </div>
         <button type="submit" class="btn btn-default pull-right">Submit</button>
     </form>
 </div>

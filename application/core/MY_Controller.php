@@ -35,7 +35,7 @@ class Application extends CI_Controller {
            }
            else {
                $this->data['menu_items'] = array(
-                   array('name' => "Game", 'link' => '/game'),
+                   array('name' => "Dashboard", 'link' => '/game'),
                    array('name' => "Players", 'link' => '/player'),
                    array('name' => "Stocks", 'link' => '/stock'),
                    array('name' => "Settings", 'link' => '/settings'),
