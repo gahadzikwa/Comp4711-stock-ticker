@@ -33,4 +33,48 @@ class Game extends Application {
 
 		$this->render();
 	}
+
+	public function game_status() {
+		$this->load->model('Gamestatus');
+
+		// 1. initialize
+		$curly = curl_init();
+
+		// 2. set the options, including the url
+		curl_setopt($curly, CURLOPT_URL, BSX_URL . 'status');
+		curl_setopt($curly, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($curly, CURLOPT_HEADER, 0);
+
+		// 3. execute and fetch the resulting HTML output
+		$response = curl_exec($curly);
+
+		// 4. free up the curl handle
+		curl_close($curly);
+
+		$xml_resp = new SimpleXMLElement($response);
+
+		$gamestatus = new GameStatus(
+			$xml_resp->state->__toString(),
+			$xml_resp->round->__toString(),
+			$xml_resp->countdown->__toString(),
+			$xml_resp->desc->__toString()
+		);
+
+		header('Content-Type: application/json');
+		echo json_encode( $gamestatus );
+	}
+
+	public function get_stocks() {
+		$result = $this->stocks->all();
+
+		header('Content-Type: application/json');
+		echo json_encode( $result );
+	}
+
+	public function get_players() {
+		$result = $this->players->all();
+
+		header('Content-Type: application/json');
+		echo json_encode( $result );
+	}
 }

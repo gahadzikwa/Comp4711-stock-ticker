@@ -8,7 +8,6 @@
             <h4 class="list-group-item-heading">
                 {current_player_username}
             </h4>
-
         </a>
         <a class="list-group-item">
             <h4 class="list-group-item-heading">
@@ -27,13 +26,42 @@
             </p>
         </a>
     </div>
+    <div class="list-group col-md-4">
+        <a class="list-group-item" style="padding-top: 70px;">
+            <h1 id="game-state" style="display: inline;">Game State: </h1>
+        </a>
+        <a class="list-group-item active">
+            <h4 class="list-group-item-heading">
+                Round
+            </h4>
+            <p id="round" class="list-group-item-text">
+
+            </p>
+        </a>
+        <a class="list-group-item">
+            <h4 class="list-group-item-heading">
+                Countdown
+            </h4>
+            <p id="countdown" class="list-group-item-text">
+
+            </p>
+        </a>
+        <a class="list-group-item">
+            <h4 class="list-group-item-heading">
+                Description
+            </h4>
+            <p id="desc" class="list-group-item-text">
+
+            </p>
+        </a>
+    </div>
 </div>
 <br>
 <div class="row">
     <div class="col-md-6">
         <h2>Buy Stocks</h2>
         <div class="table-responsive">
-            <table class="table">
+            <table id="buy-stocks-table" class="table">
                 <tr>
                     <th>Code</th>
                     <th>Name</th>
@@ -86,6 +114,20 @@
         <button style="min-width:100px" class="btn btn-danger pull-right" onclick="buyStocks()">Sell</button>
     </div>
 </div>
+<br>
+<div class="row">
+    <h2>Players</h2>
+    <div class="table-responsive">
+        <table id="players-table" class="table">
+            <tr>
+                <th>Player</th>
+                <th>Username</th>
+                <th>Cash</th>
+                <th>Delete</th>
+            </tr>
+        </table>
+    </div>
+</div>
 <script>
     function buyStocks() {
 
@@ -96,11 +138,72 @@
     }
 
     function updateStatus() {
-
+        $.ajax({
+            type: "GET",
+            url: '/game/game_status',
+            success: function (resp) {
+                $('#game-state').text('Game State: ' + resp.state);
+                $('#round').text(resp.round);
+                //console.log(resp);
+                $('#countdown').text(resp.countdown);
+                $('#desc').text(resp.desc);
+            }
+        });
     }
 
     function updateStocks() {
+        $("#buy-stocks-table tr input").prop('disabled', true);
+        $.ajax({
+            type: "GET",
+            url: '/game/get_stocks',
+            success: function (resp) {
 
+                if(!resp) {
+                    return;
+                }
+
+                $("#buy-stocks-table").find("tr:gt(0)").remove();
+
+                for(var i = 0; i < resp.length; i++) {
+                    var code = '<td><a href="/stock/stock/'+ resp[i].code + '">' + resp[i].code + '</a></td>';
+                    var name = '<td><a href="/stock/stock/'+ resp[i].name + '">' + resp[i].name + '</a></td>';
+                    var category = '<td><a href="/stock/stock/'+ resp[i].category + '">' + resp[i].category + '</a></td>';
+                    var value = '<td><a href="/stock/stock/'+ resp[i].value + '">' + resp[i].value + '</a></td>';
+                    var qty = '<td width="150px"><input type="number" value="0"/></td>';
+                    var row = $('<tr>').append(code, name, category, value, qty);
+
+                    $('#buy-stocks-table').append(row);
+                }
+            }
+        });
     }
+
+    function updatePlayers() {
+        $.ajax({
+            type: "GET",
+            url: '/game/get_players',
+            success: function (resp) {
+
+                if(!resp) {
+                    return;
+                }
+
+                $("#players-table").find("tr:gt(0)").remove();
+
+                for(var i = 0; i < resp.length; i++) {
+                    var avatar = '<td><a href="/player/'+ resp[i].Username + '"><img width="50" height="50" src="' + resp[i].Avatar + '"/></a></td>';
+                    var name = '<td><a href="/player/'+ resp[i].Username + '">' + resp[i].Username + '</a></td>';
+                    var cash = '<td><a href="/player/'+ resp[i].Username + '">' + resp[i].Cash + '</a></td>';
+                    var row = $('<tr>').append(avatar, name, cash);
+
+                    $('#players-table').append(row);
+                }
+            }
+        });
+    }
+
+    setInterval(updatePlayers, 2000);
+    setInterval(updateStocks, 10000);
+    setInterval(updateStatus, 2000);
 </script>
 
