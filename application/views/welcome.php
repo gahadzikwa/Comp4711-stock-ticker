@@ -1,6 +1,6 @@
 <h1>Welcome to the StockTicker Game!</h1>
 <hr>
-<p>Please <a href="">login</a> or <a href="">register</a> to start playing!</p>
+<p>Please <a href="/account/login">login</a> or <a href="/account/register">register</a> to start playing!</p>
 
 
 <h3>Rules Disclaimer:</h3>
