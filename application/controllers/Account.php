@@ -70,20 +70,16 @@ class Account extends Application {
         {
             redirect('/account/register','refresh');
         }
-        else 
-        {
-            
-            $data = array(
-                'Username' => $data,
-                'Password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-                'Role' => 'User',
-                'Cash' => 1000,
-                //'Avatar' => $this->upload->data()['full_path']
-            );
-            
-            $this->db->insert('players', $data);
-            $this->submitLogin();
-        }        
+
+
+        $data = array(
+            'Username' => $data,
+            'Password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT)
+        );
+        
+        $this->db->insert('players', $data);
+        $this->submitLogin();
+
     }
 
     public function logout()
