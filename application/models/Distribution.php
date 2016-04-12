@@ -17,7 +17,7 @@ class StockDistribution extends MY_Model
         return $this->db->get('stockdistribution')->result_array();
     }
 
-    public function get($username, $stock_code = NULL)
+    public function get($username, $stock_code = NULL, $qty = NULL)
     {
         $this->db->select('*');
 
@@ -30,6 +30,4 @@ class StockDistribution extends MY_Model
         $this->db->where( $sql, NULL );
         return $this->db->get('stockdistribution')->result_array();
     }
-
-    
 }

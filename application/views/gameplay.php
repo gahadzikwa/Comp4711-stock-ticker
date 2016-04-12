@@ -58,8 +58,15 @@
 </div>
 <br>
 <div class="row">
+    <div class="col-md-12">
+        <h1 id="message-label"></h1>
+    </div>
+</div>
+<div class="row">
     <div class="col-md-6">
         <h2>Buy Stocks</h2>
+        <br/>
+        <h3 id="buy-message" style="color: red;"></h3>
         <div class="table-responsive">
             <table id="buy-stocks-table" class="table">
                 <tr>
@@ -70,7 +77,7 @@
                     <th>Quantity</th>
                 </tr>
                 {stocks}
-                <tr id="buy-table">
+                <tr>
                     <td><a href="/stock/stock/{code}">{code}</a></td>
                     <td><a href="/stock/stock/{code}">{name}</a></td>
                     <td><a href="/stock/stock/{code}">{category}</a></td>
@@ -85,7 +92,7 @@
     <div class="col-md-6">
         <h2>Sell Stocks</h2>
         <div class="table-responsive">
-            <table class="table">
+            <table id="sell-stocks-table" class="table">
                 <tr>
                     <th>Code</th>
                     <th>Name</th>
@@ -111,7 +118,7 @@
         <button style="min-width:100px" class="btn btn-success pull-right" onclick="buyStocks()">Buy</button>
     </div>
     <div class="col-md-6">
-        <button style="min-width:100px" class="btn btn-danger pull-right" onclick="buyStocks()">Sell</button>
+        <button style="min-width:100px" class="btn btn-danger pull-right" onclick="sellStocks()">Sell</button>
     </div>
 </div>
 <br>
@@ -130,7 +137,38 @@
 </div>
 <script>
     function buyStocks() {
+        $("#buy-stocks-table tr input").prop('disabled', true);
 
+        $('#buy-stocks-table').find('tr').each(function (index) {
+
+            if (index > 1){
+
+                var stock  =   $(this).children().eq(0).text().trim();
+                
+                var qty    =   $(this).children().eq(4).children().val();
+
+                var message = '';
+
+                if (qty > 0)
+                    $.ajax({
+                        type: "POST",
+                        url: '/agent/buy/' + stock + "/" + qty,
+                        success: function (resp) {
+                            var t = JSON.parse(resp);
+                            if ( t['message'] === 'success' )
+                                message += "Stock " + stock + ": Bought success at " + t['datetime'] + "\n";
+                            else 
+                                message += "Stock " + stock + ": " + t['message'] + "\n";
+                            
+                        }
+                    });
+
+                $("#buy-message").text(message);
+
+            }
+        });
+
+        $("#buy-stocks-table tr input").prop('disabled', false);
     }
 
     function sellStocks() {

@@ -78,7 +78,7 @@ class Account extends Application {
                 'Password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
                 'Role' => 'User',
                 'Cash' => 1000,
-                'Avatar' => $this->upload->data()['full_path']
+                //'Avatar' => $this->upload->data()['full_path']
             );
             
             $this->db->insert('players', $data);

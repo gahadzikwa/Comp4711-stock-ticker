@@ -51,8 +51,7 @@ class Agent extends Application
         echo json_encode( $gamestatus );
     }
 
-    public function buy($stock_code, $qty) 
-    {
+    public function buy($stock_code, $qty) {
         // 
         // Validate user data
         // 
@@ -156,6 +155,7 @@ class Agent extends Application
 
     public function sell() {
 
+        
     }
 
     public function register_agent($teamid, $teamname, $password) {
