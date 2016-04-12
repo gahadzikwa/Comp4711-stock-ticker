@@ -42,7 +42,7 @@
                     <th>Quantity</th>
                 </tr>
                 {stocks}
-                <tr>
+                <tr id="buy-table">
                     <td><a href="/stock/stock/{code}">{code}</a></td>
                     <td><a href="/stock/stock/{code}">{name}</a></td>
                     <td><a href="/stock/stock/{code}">{category}</a></td>

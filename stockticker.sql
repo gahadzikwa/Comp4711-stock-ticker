@@ -57,12 +57,12 @@ INSERT INTO `players` (`Username`, `Password`, `Role`, `Cash`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `stockdistribution` (
-  `StockCode` VARCHAR(8) NOT NULL,
   `Username` VARCHAR(12) NOT NULL,
+  `StockCode` VARCHAR(8) NOT NULL,
   `Certificate` VARCHAR(20) NOT NULL,
   `Quantity` int NOT NULL,
   `DateTime` TIMESTAMP NOT NULL,
-  PRIMARY KEY (StockCode, Username, Certificate),
+  PRIMARY KEY (Username, StockCode, Certificate),
   FOREIGN KEY (Username) REFERENCES players(Username)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

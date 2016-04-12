@@ -9,6 +9,7 @@ class Agent extends Application
 {
     function __contruct() {
         parent::__construct();  
+        $this->load->model('stockdistribution');
     }
 
     public function management()
@@ -50,7 +51,7 @@ class Agent extends Application
         echo json_encode( $gamestatus );
     }
 
-    public function buy($stock_code, $qty, $value) 
+    public function buy($stock_code, $qty) 
     {
         // Validate user data
 //        if (! $player = $this->session->userdata('username')){
@@ -125,21 +126,30 @@ class Agent extends Application
         curl_close($curl);
 
         // Process the return output from the API        
-        $xml_resp = new SimpleXMLElement($response);
-
+        $xml_resp = new SimpleXMLElement($response);    
+        
         // If error occur return error, otherwise insert the certificate into database and return success messsage
-        if (!empty($xml_resp->error)) {
+        if ( !is_null($xml_resp->error ) ) {
             echo json_encode($xml_resp);
         }
         else {
             // Insert certificate into database
+            $data = array(
+                'Username'      =>  $player->Username,
+                'StockCode'     =>  $xml_resp->stock->__toString(),
+                'Certificate'   =>  $xml_resp->token->__toString(),
+                'Quantity'      =>  $xml_resp->amount->__toString(),
+                'DateTime'      =>  $xml_resp->datetime->__toString()
+            );
+            
+            $this->db->insert('stockdistribution', $data);
+
+            // Send success message back to client
             echo json_encode( array(
                     'message' => 'success',
                     'datetime' => $xml_resp->datetime->__toString()
             ) );
         }
-
-        return;
     }
 
     public function sell() {

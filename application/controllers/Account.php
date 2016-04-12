@@ -97,7 +97,7 @@ class Account extends Application {
                 'Avatar' => $this->upload->data()['full_path']
             );
             
-            $this->db->insert('players', $data);   
+            $this->db->insert('players', $data);
             $this->submitLogin();
         }        
     }

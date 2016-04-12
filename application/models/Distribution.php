@@ -1,6 +1,6 @@
 <?php
 
-class StockDistribution extends CI_Model
+class StockDistribution extends MY_Model
 {
     public function __construct()
     {
@@ -16,4 +16,20 @@ class StockDistribution extends CI_Model
     {
         return $this->db->get('stockdistribution')->result_array();
     }
+
+    public function get($username, $stock_code = NULL)
+    {
+        $this->db->select('*');
+
+        $sql = "Username = '" . $username . "'";
+        
+        if (is_null($stock_code))
+            $sql .= " AND StockCode = '" . $stock_code . "'";    
+
+
+        $this->db->where( $sql, NULL );
+        return $this->db->get('stockdistribution')->result_array();
+    }
+
+    
 }
