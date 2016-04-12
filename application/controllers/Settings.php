@@ -7,7 +7,9 @@ class Settings extends Application {
     }
 
     public function index() {
-
+        if ($this->session->userdata('user') == null) {
+            redirect('/account/login','refresh');
+        }
         $this->load->model('players');
 
         $user = $this->session->userdata('user');

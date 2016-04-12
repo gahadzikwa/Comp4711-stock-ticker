@@ -14,6 +14,9 @@ class Agent extends Application
 
     public function management()
     {
+        if ($this->session->userdata('user') == null) {
+            redirect('/account/login','refresh');
+        }
         $this->load->model('players');
         $this->data['players'] = $this->players->all();
 

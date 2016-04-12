@@ -13,6 +13,9 @@ class Stock extends Application
 
     public function index()
     {
+        if ($this->session->userdata('user') == null) {
+            redirect('/account/login','refresh');
+        }
         $this->stock();
     }
 

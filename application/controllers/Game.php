@@ -11,6 +11,9 @@ class Game extends Application {
 
 	public function index()
 	{
+                if ($this->session->userdata('user') == null) {
+                    redirect('/account/login','refresh');
+                }
 		if ($this->session->userdata('user') !== null) {
 			if($this->session->userdata('user')->Role == ROLE_ADMIN) {
 				redirect('agent/management');

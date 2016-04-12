@@ -13,6 +13,9 @@ class Player extends Application
 
     public function index()
     {
+        if ($this->session->userdata('user') == null) {
+            redirect('/account/login','refresh');
+        }
         $this->player($this->session->userdata('user')->Username);
     }
 
