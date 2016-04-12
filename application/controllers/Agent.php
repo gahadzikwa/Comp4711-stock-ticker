@@ -154,7 +154,6 @@ class Agent extends Application
     }
 
     public function sell() {
-
         
     }
 
