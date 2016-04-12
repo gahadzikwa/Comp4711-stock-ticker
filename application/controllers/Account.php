@@ -23,14 +23,14 @@ class Account extends Application {
 
         if($data == null)
         {
-            redirect('/account','refresh');
+            redirect('/account/login','refresh');
         }
 
         $player = $this->players->get($data);
 
         if($player == null)
         {
-            redirect('/account','refresh');
+            redirect('/account/login','refresh');
         }
 
         if (password_verify($this->input->post('password'),$player->Password)) 
@@ -39,7 +39,7 @@ class Account extends Application {
         }
         else
         {
-            redirect('/account','refresh');
+            redirect('/account/login','refresh');
         }
 
         redirect('/game', 'refresh');
@@ -69,37 +69,17 @@ class Account extends Application {
         if($player != null) 
         {
             redirect('/account/register','refresh');
-        } 
-        
-        $config['upload_path'] = 'assets/images/avatars';
-        $config['allowed_types'] = 'gif|jpg|png';
-        $config['max_size'] = '0';
-        $config['max_width'] = '0';
-        $config['max_height'] = '0';
-
-        $this->load->library('upload');
-        $this->upload->initialize($config);
-        
-        if(!$this->upload->do_upload()) {
-            
-            $error = array('error' => $this->upload->display_errors());
-            $this->load->view('register',$error);
-            
         }
-        else 
-        {
-            
-            $data = array(
-                'Username' => $data,
-                'Password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-                'Role' => 'User',
-                'Cash' => 1000,
-                'Avatar' => $this->upload->data()['full_path']
-            );
-            
-            $this->db->insert('players', $data);   
-            $this->submitLogin();
-        }        
+
+
+        $data = array(
+            'Username' => $data,
+            'Password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT)
+        );
+
+        $this->db->insert('players', $data);
+        $this->submitLogin();
+
     }
 
     public function logout()

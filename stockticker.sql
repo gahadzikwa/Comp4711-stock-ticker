@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `players` (
   `Username` varchar(12) NOT NULL,
   `Password` varchar(64) NOT NULL,
   `Role` varchar(12) DEFAULT 'player',
-  `Cash` int DEFAULT 1000,
+  `Cash` int DEFAULT 5000,
   `Avatar` varchar(64) DEFAULT '/assets/images/avatars/default.jpg',
   PRIMARY KEY (Username)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -43,11 +43,11 @@ CREATE TABLE IF NOT EXISTS `players` (
 --
 
 INSERT INTO `players` (`Username`, `Password`, `Role`, `Cash`) VALUES
-('mickey', '$2y$10$uuYKSeNSudTSleojm38bseb/FL5c/GTIsRd4xo9eWX36OLrRdU./i', 'Admin', 1000),
+('mickey', '$2y$10$uuYKSeNSudTSleojm38bseb/FL5c/GTIsRd4xo9eWX36OLrRdU./i', 'Admin', 5000),
 ('brandon', '$2y$10$uuYKSeNSudTSleojm38bseb/FL5c/GTIsRd4xo9eWX36OLrRdU./i', 'Player', 100000),
-('derrick', '$2y$10$uuYKSeNSudTSleojm38bseb/FL5c/GTIsRd4xo9eWX36OLrRdU./i', 'Player', 1000),
-('duy', '$2y$10$uuYKSeNSudTSleojm38bseb/FL5c/GTIsRd4xo9eWX36OLrRdU./i', 'Player', 1000),
-('clifton', '$2y$10$uuYKSeNSudTSleojm38bseb/FL5c/GTIsRd4xo9eWX36OLrRdU./i', 'Player', 1000);
+('derrick', '$2y$10$uuYKSeNSudTSleojm38bseb/FL5c/GTIsRd4xo9eWX36OLrRdU./i', 'Player', 5000),
+('duy', '$2y$10$uuYKSeNSudTSleojm38bseb/FL5c/GTIsRd4xo9eWX36OLrRdU./i', 'Player', 5000),
+('clifton', '$2y$10$uuYKSeNSudTSleojm38bseb/FL5c/GTIsRd4xo9eWX36OLrRdU./i', 'Player', 5000);
 
 -- --------------------------------------------------------
 

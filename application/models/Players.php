@@ -42,4 +42,18 @@ class Players extends CI_Model
         $this->db->where('username', $username);
         $this->db->delete('players');
     }
+
+    public function update($record) {
+        // convert object to associative array, if needed
+        if (is_object($record)) {
+            $data = get_object_vars($record);
+        } else {
+            $data = $record;
+        }
+        // update the DB table appropriately
+        $key = $data['Username'];
+        $this->db->where('Username=', $key);
+
+        return $this->db->update('players', $data);
+    }
 }
