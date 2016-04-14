@@ -14,9 +14,6 @@ class Agent extends Application
 
     public function management()
     {
-        if ($this->session->userdata('user') == null) {
-            redirect('/account/login','refresh');
-        }
         $this->load->model('players');
         $this->data['players'] = $this->players->all();
 
@@ -157,7 +154,40 @@ class Agent extends Application
     }
 
     public function sell() {
-        
+        $player = $this->session->userdata('user');
+
+        $this->stockdistribution->get();
+
+        $params = array(
+            'team' => TEAM_CODE,
+            'token' => AGENT_TOKEN,
+            'player' => $player->Username,
+            'stock' => $stock_code,
+            'quantity' => $qty,
+            'certificate' => '' 
+         );
+
+        $curl = curl_init();
+
+        curl_setopt($curl, CURLOPT_URL, BSX_URL . '/sell');
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); 
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
+        // Process the return output from the API        
+        $xml_resp = new SimpleXMLElement($response);    
+
+        // Send success message back to client
+        echo json_encode( 
+            array(
+                'message' => 'success',
+                'datetime' => $xml_resp->datetime->__toString()
+            )
+        );        
     }
 
     public function register_agent($teamid, $teamname, $password) {

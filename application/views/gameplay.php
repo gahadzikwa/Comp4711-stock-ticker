@@ -164,7 +164,7 @@
                     });
 
                 $("#buy-message").text(message);
-
+                updateStocks();
             }
         });
 
@@ -212,8 +212,10 @@
 
                     $('#buy-stocks-table').append(row);
                 }
+
+                $("#buy-stocks-table tr input").prop('disabled', false);
             }
-        });
+        })
     }
 
     function updatePlayers() {
