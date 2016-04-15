@@ -8,8 +8,8 @@
 class Agent extends Application
 {
     function __contruct() {
-        parent::__construct();  
-        $this->load->model('stockdistribution');
+        parent::__construct();
+        $this->load->model('distribution');
     }
 
     public function management()
@@ -127,20 +127,30 @@ class Agent extends Application
         curl_close($curl);
 
         // Process the return output from the API        
-        $xml_resp = new SimpleXMLElement($response);    
-        
+        if ( empty($response) )
+            $xml_resp = new SimpleXMLElement("<error><message>No response from server.</message></error>");
+        else
+            $xml_resp = new SimpleXMLElement($response);
+
+        // var_dump($response);
+
         // If error occur return error, otherwise insert the certificate into database and return success messsage
-        if ( !is_null($xml_resp->error ) ) {
-            echo json_encode($xml_resp);
-        }
-        else {
+        if ( $xml_resp->getName() == 'error' ) {
+            
+            echo json_encode( $xml_resp );
+        
+        } else {
             // Insert certificate into database
+            $currentTime = DateTime::createFromFormat( 'U', $xml_resp->datetime->__toString() );
+
+            $formattedString = $currentTime->format( 'c' );
+
             $data = array(
                 'Username'      =>  $player->Username,
                 'StockCode'     =>  $xml_resp->stock->__toString(),
                 'Certificate'   =>  $xml_resp->token->__toString(),
                 'Quantity'      =>  $xml_resp->amount->__toString(),
-                'DateTime'      =>  $xml_resp->datetime->__toString()
+                'DateTime'      =>  $formattedString
             );
             
             $this->db->insert('stockdistribution', $data);
@@ -148,15 +158,16 @@ class Agent extends Application
             // Send success message back to client
             echo json_encode( array(
                     'message' => 'success',
-                    'datetime' => $xml_resp->datetime->__toString()
+                    'datetime' => $formattedString
             ) );
         }
     }
 
-    public function sell() {
+    public function sell($stock_code, $qty) {
+
         $player = $this->session->userdata('user');
 
-        $this->stockdistribution->get();
+        var_dump( $this->distribution->get($player, $stock_code, TRUE) );
 
         $params = array(
             'team' => TEAM_CODE,

@@ -63,7 +63,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 buy-stuff">
         <h2>Buy Stocks</h2>
         <br/>
         <h3 id="buy-message" style="color: red;"></h3>
@@ -89,7 +89,7 @@
         </div>
     </div
     <br>
-    <div class="col-md-6">
+    <div class="col-md-6 sell-stuff">
         <h2>Sell Stocks</h2>
         <div class="table-responsive">
             <table id="sell-stocks-table" class="table">
@@ -114,10 +114,10 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 buy-stuff">
         <button style="min-width:100px" class="btn btn-success pull-right" onclick="buyStocks()">Buy</button>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 sell-stuff">
         <button style="min-width:100px" class="btn btn-danger pull-right" onclick="sellStocks()">Sell</button>
     </div>
 </div>
@@ -136,6 +136,8 @@
     </div>
 </div>
 <script>
+    var message;
+
     function buyStocks() {
         $("#buy-stocks-table tr input").prop('disabled', true);
 
@@ -143,11 +145,11 @@
 
             if (index > 1){
 
+                message = "Buy stock";
+
                 var stock  =   $(this).children().eq(0).text().trim();
                 
                 var qty    =   $(this).children().eq(4).children().val();
-
-                var message = '';
 
                 if (qty > 0)
                     $.ajax({
@@ -156,14 +158,15 @@
                         success: function (resp) {
                             var t = JSON.parse(resp);
                             if ( t['message'] === 'success' )
-                                message += "Stock " + stock + ": Bought success at " + t['datetime'] + "\n";
+                                message += "<br/>Stock " + stock + ": Bought success at " + t['datetime'];
                             else 
-                                message += "Stock " + stock + ": " + t['message'] + "\n";
+                                message += "<br/>Stock " + stock + ": " + t['message'];
                             
+                            $("#buy-message").html(message);
+                            console.log( resp );
+                            console.log( message );
                         }
                     });
-
-                $("#buy-message").text(message);
                 updateStocks();
             }
         });
@@ -185,6 +188,14 @@
                 //console.log(resp);
                 $('#countdown').text(resp.countdown);
                 $('#desc').text(resp.desc);
+
+                if ( resp.state != 3 ) {
+                    $( ".buy-stuff" ).children().prop( "disabled", true );
+                    $( ".sell-stuff" ).children().prop( "disabled", true );
+                } else {
+                    $( ".buy-stuff" ).children().prop( "disabled", false );
+                    $( ".sell-stuff" ).children().prop( "disabled", false );
+                }
             }
         });
     }
@@ -231,10 +242,11 @@
                 $("#players-table").find("tr:gt(0)").remove();
 
                 for(var i = 0; i < resp.length; i++) {
-                    var avatar = '<td><a href="/player/'+ resp[i].Username + '"><img width="50" height="50" src="' + resp[i].Avatar + '"/></a></td>';
+                    // var avatar = '<td><a href="/player/'+ resp[i].Username + '"><img width="50" height="50" src="' + resp[i].Avatar + '"/></a></td>';
                     var name = '<td><a href="/player/'+ resp[i].Username + '">' + resp[i].Username + '</a></td>';
                     var cash = '<td><a href="/player/'+ resp[i].Username + '">' + resp[i].Cash + '</a></td>';
-                    var row = $('<tr>').append(avatar, name, cash);
+                    //var row = $('<tr>').append(avatar, name, cash);
+                    var row = $('<tr>').append(name, cash);
 
                     $('#players-table').append(row);
                 }
@@ -242,8 +254,8 @@
         });
     }
 
-    setInterval(updatePlayers, 2000);
-    setInterval(updateStocks, 10000);
-    setInterval(updateStatus, 2000);
+    setInterval(updatePlayers,  2000);
+    setInterval(updateStocks,   10000);
+    setInterval(updateStatus,   2000);
 </script>
 

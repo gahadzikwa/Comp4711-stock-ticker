@@ -1,6 +1,6 @@
 <?php
 
-class StockDistribution extends MY_Model
+class Distribution extends MY_Model
 {
     public function __construct()
     {
@@ -17,17 +17,20 @@ class StockDistribution extends MY_Model
         return $this->db->get('stockdistribution')->result_array();
     }
 
-    public function get($username, $stock_code = NULL, $qty = NULL)
+    public function get($username, $stock_code = NULL, $qtyOrder = FALSE)
     {
         $this->db->select('*');
 
         $sql = "Username = '" . $username . "'";
         
-        if (is_null($stock_code))
+        if (!is_null($stock_code))
             $sql .= " AND StockCode = '" . $stock_code . "'";    
 
-
         $this->db->where( $sql, NULL );
+
+        if ( $qtyOrder == TRUE )
+            $this->db->order_by( "Quantity", "asc" );
+
         return $this->db->get('stockdistribution')->result_array();
     }
 }
